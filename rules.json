@@ -1,0 +1,3507 @@
+{
+ "source": "NLM I-MAGIC demo (SNOMED CT to ICD-10-CM Map release 20260901), reconstructed from per-condition queries",
+ "compiled": "2026-11-03",
+ "tw_codes": "CMS ICD-10-CM FY2023 codes file (Taiwan NHI edition from 2025-01-01)",
+ "concepts": [
+  {
+   "id": "10509002",
+   "name": "Acute bronchitis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J20.9",
+     "ext": "",
+     "name": "Acute bronchitis, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J20.9": {
+     "name_us": "Acute bronchitis, unspecified",
+     "valid": true,
+     "name": "Acute bronchitis, unspecified",
+     "zh": "急性支氣管炎"
+    }
+   }
+  },
+  {
+   "id": "10960001000119106",
+   "name": "Puncture wound of right forearm",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S51.831",
+     "ext": "-",
+     "name": "Puncture wound without foreign body of right forearm"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "10949791000119102",
+       "label": "Stab wound of right forearm",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S51.811",
+         "ext": "-",
+         "name": "Laceration without foreign body of right forearm"
+        }
+       ]
+      },
+      {
+       "value": "41461000087106",
+       "label": "Puncture wound of right forearm with foreign body",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S51.841",
+         "ext": "-",
+         "name": "Puncture wound with foreign body of right forearm"
+        },
+        {
+         "code": "Z18.9",
+         "ext": "",
+         "name": "Retained foreign body fragments, unspecified material"
+        }
+       ]
+      },
+      {
+       "value": "10960001000119106",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S51.831",
+         "ext": "A",
+         "name": "Puncture wound without foreign body of right forearm (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S51.831",
+         "ext": "D",
+         "name": "Puncture wound without foreign body of right forearm (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S51.831",
+         "ext": "S",
+         "name": "Puncture wound without foreign body of right forearm (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Open wound of elbow and forearm\"": [
+     "Code also any associated wound infection"
+    ]
+   },
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S51.831-": {
+     "name_us": "Puncture wound without foreign body of right forearm",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S51831A": {
+       "name": "Puncture wound without foreign body of right forearm, initial encounter",
+       "zh": "右側前臂穿刺傷未伴有異物之初期照護"
+      },
+      "S51831D": {
+       "name": "Puncture wound without foreign body of right forearm, subsequent encounter",
+       "zh": "右側前臂穿刺傷未伴有異物之後續照護"
+      },
+      "S51831S": {
+       "name": "Puncture wound without foreign body of right forearm, sequela",
+       "zh": "右側前臂穿刺傷未伴有異物之後遺症"
+      }
+     }
+    },
+    "S51.811-": {
+     "name_us": "Laceration without foreign body of right forearm",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S51811A": {
+       "name": "Laceration without foreign body of right forearm, initial encounter",
+       "zh": "右側前臂撕裂傷未伴有異物之初期照護"
+      },
+      "S51811D": {
+       "name": "Laceration without foreign body of right forearm, subsequent encounter",
+       "zh": "右側前臂撕裂傷未伴有異物之後續照護"
+      },
+      "S51811S": {
+       "name": "Laceration without foreign body of right forearm, sequela",
+       "zh": "右側前臂撕裂傷未伴有異物之後遺症"
+      }
+     }
+    },
+    "S51.841-": {
+     "name_us": "Puncture wound with foreign body of right forearm",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S51841A": {
+       "name": "Puncture wound with foreign body of right forearm, initial encounter",
+       "zh": "右側前臂穿刺傷伴有異物之初期照護"
+      },
+      "S51841D": {
+       "name": "Puncture wound with foreign body of right forearm, subsequent encounter",
+       "zh": "右側前臂穿刺傷伴有異物之後續照護"
+      },
+      "S51841S": {
+       "name": "Puncture wound with foreign body of right forearm, sequela",
+       "zh": "右側前臂穿刺傷伴有異物之後遺症"
+      }
+     }
+    },
+    "Z18.9": {
+     "name_us": "Retained foreign body fragments, unspecified material",
+     "valid": true,
+     "name": "Retained foreign body fragments, unspecified material",
+     "zh": "殘留未明示材質異物碎片"
+    },
+    "S51.831A": {
+     "name_us": "Puncture wound without foreign body of right forearm (initial encounter)",
+     "valid": true,
+     "name": "Puncture wound without foreign body of right forearm, initial encounter",
+     "zh": "右側前臂穿刺傷未伴有異物之初期照護"
+    },
+    "S51.831D": {
+     "name_us": "Puncture wound without foreign body of right forearm (subsequent encounter)",
+     "valid": true,
+     "name": "Puncture wound without foreign body of right forearm, subsequent encounter",
+     "zh": "右側前臂穿刺傷未伴有異物之後續照護"
+    },
+    "S51.831S": {
+     "name_us": "Puncture wound without foreign body of right forearm (sequela)",
+     "valid": true,
+     "name": "Puncture wound without foreign body of right forearm, sequela",
+     "zh": "右側前臂穿刺傷未伴有異物之後遺症"
+    }
+   }
+  },
+  {
+   "id": "10960281000119109",
+   "name": "Laceration of right forearm",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S51.811",
+     "ext": "-",
+     "name": "Laceration without foreign body of right forearm"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "11769171000119109",
+       "label": "Laceration of tendon of right forearm",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S56.921",
+         "ext": "-",
+         "name": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm"
+        }
+       ]
+      },
+      {
+       "value": "11773131000119103",
+       "label": "Laceration of muscle of right forearm",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S56.921",
+         "ext": "-",
+         "name": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm"
+        }
+       ]
+      },
+      {
+       "value": "10960281000119109",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S51.811",
+         "ext": "A",
+         "name": "Laceration without foreign body of right forearm (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S51.811",
+         "ext": "D",
+         "name": "Laceration without foreign body of right forearm (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S51.811",
+         "ext": "S",
+         "name": "Laceration without foreign body of right forearm (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Open wound of elbow and forearm\"": [
+     "Code also any associated wound infection"
+    ]
+   },
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S51.811-": {
+     "name_us": "Laceration without foreign body of right forearm",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S51811A": {
+       "name": "Laceration without foreign body of right forearm, initial encounter",
+       "zh": "右側前臂撕裂傷未伴有異物之初期照護"
+      },
+      "S51811D": {
+       "name": "Laceration without foreign body of right forearm, subsequent encounter",
+       "zh": "右側前臂撕裂傷未伴有異物之後續照護"
+      },
+      "S51811S": {
+       "name": "Laceration without foreign body of right forearm, sequela",
+       "zh": "右側前臂撕裂傷未伴有異物之後遺症"
+      }
+     }
+    },
+    "S56.921-": {
+     "name_us": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S56921A": {
+       "name": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm, initial encounter",
+       "zh": "右側前臂區位未明示肌肉、筋膜及肌腱撕裂傷之初期照護"
+      },
+      "S56921D": {
+       "name": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm, subsequent encounter",
+       "zh": "右側前臂區位未明示肌肉、筋膜及肌腱撕裂傷之後續照護"
+      },
+      "S56921S": {
+       "name": "Laceration of unspecified muscles, fascia and tendons at forearm level, right arm, sequela",
+       "zh": "右側前臂區位未明示肌肉、筋膜及肌腱撕裂傷之後遺症"
+      }
+     }
+    },
+    "S51.811A": {
+     "name_us": "Laceration without foreign body of right forearm (initial encounter)",
+     "valid": true,
+     "name": "Laceration without foreign body of right forearm, initial encounter",
+     "zh": "右側前臂撕裂傷未伴有異物之初期照護"
+    },
+    "S51.811D": {
+     "name_us": "Laceration without foreign body of right forearm (subsequent encounter)",
+     "valid": true,
+     "name": "Laceration without foreign body of right forearm, subsequent encounter",
+     "zh": "右側前臂撕裂傷未伴有異物之後續照護"
+    },
+    "S51.811S": {
+     "name_us": "Laceration without foreign body of right forearm (sequela)",
+     "valid": true,
+     "name": "Laceration without foreign body of right forearm, sequela",
+     "zh": "右側前臂撕裂傷未伴有異物之後遺症"
+    }
+   }
+  },
+  {
+   "id": "10968281000119107",
+   "name": "Laceration of right great toe",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S91.111",
+     "ext": "-",
+     "name": "Laceration without foreign body of right great toe without damage to nail"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S91.111",
+         "ext": "A",
+         "name": "Laceration without foreign body of right great toe without damage to nail (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S91.111",
+         "ext": "D",
+         "name": "Laceration without foreign body of right great toe without damage to nail (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S91.111",
+         "ext": "S",
+         "name": "Laceration without foreign body of right great toe without damage to nail (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Open wound of ankle, foot and toes\"": [
+     "Code also any associated wound infection"
+    ]
+   },
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S91.111-": {
+     "name_us": "Laceration without foreign body of right great toe without damage to nail",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S91111A": {
+       "name": "Laceration without foreign body of right great toe without damage to nail, initial encounter",
+       "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之初期照護"
+      },
+      "S91111D": {
+       "name": "Laceration without foreign body of right great toe without damage to nail, subsequent encounter",
+       "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之後續照護"
+      },
+      "S91111S": {
+       "name": "Laceration without foreign body of right great toe without damage to nail, sequela",
+       "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之後遺症"
+      }
+     }
+    },
+    "S91.111A": {
+     "name_us": "Laceration without foreign body of right great toe without damage to nail (initial encounter)",
+     "valid": true,
+     "name": "Laceration without foreign body of right great toe without damage to nail, initial encounter",
+     "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之初期照護"
+    },
+    "S91.111D": {
+     "name_us": "Laceration without foreign body of right great toe without damage to nail (subsequent encounter)",
+     "valid": true,
+     "name": "Laceration without foreign body of right great toe without damage to nail, subsequent encounter",
+     "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之後續照護"
+    },
+    "S91.111S": {
+     "name_us": "Laceration without foreign body of right great toe without damage to nail (sequela)",
+     "valid": true,
+     "name": "Laceration without foreign body of right great toe without damage to nail, sequela",
+     "zh": "右側大腳趾撕裂傷未伴有異物未伴有趾甲損傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "121021000119105",
+   "name": "New daily persistent headache",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "G44.52",
+     "ext": "",
+     "name": "New daily persistent headache (NDPH)"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "G44.52": {
+     "name_us": "New daily persistent headache (NDPH)",
+     "valid": true,
+     "name": "New daily persistent headache (NDPH)",
+     "zh": "新發生每日持續性頭痛"
+    }
+   }
+  },
+  {
+   "id": "125593007",
+   "name": "Injury of face",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S09.93X",
+     "ext": "-",
+     "name": "Unspecified injury of face"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S09.93X",
+         "ext": "A",
+         "name": "Unspecified injury of face (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S09.93X",
+         "ext": "D",
+         "name": "Unspecified injury of face (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S09.93X",
+         "ext": "S",
+         "name": "Unspecified injury of face (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S09.93X-": {
+     "name_us": "Unspecified injury of face",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S0993XA": {
+       "name": "Unspecified injury of face, initial encounter",
+       "zh": "臉部損傷之初期照護"
+      },
+      "S0993XD": {
+       "name": "Unspecified injury of face, subsequent encounter",
+       "zh": "臉部損傷之後續照護"
+      },
+      "S0993XS": {
+       "name": "Unspecified injury of face, sequela",
+       "zh": "臉部損傷之後遺症"
+      }
+     }
+    },
+    "S09.93XA": {
+     "name_us": "Unspecified injury of face (initial encounter)",
+     "valid": true,
+     "name": "Unspecified injury of face, initial encounter",
+     "zh": "臉部損傷之初期照護"
+    },
+    "S09.93XD": {
+     "name_us": "Unspecified injury of face (subsequent encounter)",
+     "valid": true,
+     "name": "Unspecified injury of face, subsequent encounter",
+     "zh": "臉部損傷之後續照護"
+    },
+    "S09.93XS": {
+     "name_us": "Unspecified injury of face (sequela)",
+     "valid": true,
+     "name": "Unspecified injury of face, sequela",
+     "zh": "臉部損傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "12574004",
+   "name": "Noninfectious gastroenteritis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "K52.9",
+     "ext": "",
+     "name": "Noninfective gastroenteritis and colitis, unspecified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P77.9",
+         "ext": "",
+         "name": "Necrotizing enterocolitis in newborn, unspecified"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "K52.9",
+         "ext": "",
+         "name": "Noninfective gastroenteritis and colitis, unspecified"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "K52.9": {
+     "name_us": "Noninfective gastroenteritis and colitis, unspecified",
+     "valid": true,
+     "name": "Noninfective gastroenteritis and colitis, unspecified",
+     "zh": "非傳染性胃腸炎及結腸炎"
+    },
+    "P77.9": {
+     "name_us": "Necrotizing enterocolitis in newborn, unspecified",
+     "valid": true,
+     "name": "Necrotizing enterocolitis in newborn, unspecified",
+     "zh": "新生兒壞死性腸炎"
+    }
+   }
+  },
+  {
+   "id": "128187005",
+   "name": "Vascular headache",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "G44.1",
+     "ext": "",
+     "name": "Vascular headache, not elsewhere classified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "G44.1": {
+     "name_us": "Vascular headache, not elsewhere classified",
+     "valid": true,
+     "name": "Vascular headache, not elsewhere classified",
+     "zh": "血管性頭痛，他處未歸類者"
+    }
+   }
+  },
+  {
+   "id": "132721000119104",
+   "name": "Hypertensive emergency",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "I16.1",
+     "ext": "",
+     "name": "Hypertensive emergency"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "70272006",
+       "label": "Malignant hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I10",
+         "ext": "",
+         "name": "Essential (primary) hypertension"
+        }
+       ]
+      },
+      {
+       "value": "78975002",
+       "label": "Malignant essential hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I10",
+         "ext": "",
+         "name": "Essential (primary) hypertension"
+        }
+       ]
+      },
+      {
+       "value": "81626002",
+       "label": "Malignant hypertension in obstetric context",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "TBD",
+         "ext": "",
+         "name": "(Further information is required before mapping)"
+        }
+       ]
+      },
+      {
+       "value": "89242004",
+       "label": "Malignant secondary hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I15.9",
+         "ext": "",
+         "name": "Secondary hypertension, unspecified"
+        }
+       ]
+      },
+      {
+       "value": "10562009",
+       "label": "Malignant hypertension complicating AND / OR reason for care during childbirth",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "O10.02",
+         "ext": "",
+         "name": "Pre-existing essential hypertension complicating childbirth"
+        }
+       ]
+      },
+      {
+       "value": "29259002",
+       "label": "Malignant hypertension complicating AND/OR reason for care during pregnancy",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "O10.019",
+         "ext": "",
+         "name": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester"
+        }
+       ]
+      },
+      {
+       "value": "194783001",
+       "label": "Malignant secondary renovascular hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I15.0",
+         "ext": "",
+         "name": "Renovascular hypertension"
+        }
+       ]
+      },
+      {
+       "value": "132721000119104",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "I16.1",
+         "ext": "",
+         "name": "Hypertensive emergency"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Hypertensive emergency\"": [
+     "Code also, if applicable, to identify specific organ dysfunction, such as: acute kidney injury (N17.-) acute myocardial infarction (I21.-) acute pulmonary edema (left and/or right ventricular failure) (J81.0, I50.-) aortic dissection (I71.0-) cerebral hemorrhage (I60.-. I61.-, I62.-) cerebral infarction (I63.-) eclampsia (O15.-) hypertensive encephalopathy (I67.4) seizure (R56.9)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "I16.1": {
+     "name_us": "Hypertensive emergency",
+     "valid": true,
+     "name": "Hypertensive emergency",
+     "zh": "高血壓急症"
+    },
+    "I10": {
+     "name_us": "Essential (primary) hypertension",
+     "valid": true,
+     "name": "Essential (primary) hypertension",
+     "zh": "本態性(原發性)高血壓"
+    },
+    "TBD": {
+     "name_us": "(Further information is required before mapping)",
+     "valid": null,
+     "name": "",
+     "zh": ""
+    },
+    "I15.9": {
+     "name_us": "Secondary hypertension, unspecified",
+     "valid": true,
+     "name": "Secondary hypertension, unspecified",
+     "zh": "續發性高血壓"
+    },
+    "O10.02": {
+     "name_us": "Pre-existing essential hypertension complicating childbirth",
+     "valid": true,
+     "name": "Pre-existing essential hypertension complicating childbirth",
+     "zh": "生產伴有既存本態性高血壓"
+    },
+    "O10.019": {
+     "name_us": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester",
+     "valid": true,
+     "name": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester",
+     "zh": "妊娠伴有既存本態性高血壓，未明示妊娠期"
+    },
+    "I15.0": {
+     "name_us": "Renovascular hypertension",
+     "valid": true,
+     "name": "Renovascular hypertension",
+     "zh": "腎血管性續發性高血壓"
+    }
+   }
+  },
+  {
+   "id": "17741008",
+   "name": "Acute tonsillitis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J03.90",
+     "ext": "",
+     "name": "Acute tonsillitis, unspecified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "195671000",
+       "label": "Acute bacterial tonsillitis",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "J03.80",
+         "ext": "",
+         "name": "Acute tonsillitis due to other specified organisms"
+        },
+        {
+         "code": "B96.89",
+         "ext": "",
+         "name": "Other specified bacterial agents as the cause of diseases classified elsewhere"
+        }
+       ]
+      },
+      {
+       "value": "195677001",
+       "label": "Recurrent acute tonsillitis",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "J03.91",
+         "ext": "",
+         "name": "Acute recurrent tonsillitis, unspecified"
+        }
+       ]
+      },
+      {
+       "value": "10629271000119107",
+       "label": "Acute tonsillitis caused by Streptococcus",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "J03.00",
+         "ext": "",
+         "name": "Acute streptococcal tonsillitis, unspecified"
+        }
+       ]
+      },
+      {
+       "value": "195673002",
+       "label": "Acute staphylococcal tonsillitis",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "J03.80",
+         "ext": "",
+         "name": "Acute tonsillitis due to other specified organisms"
+        },
+        {
+         "code": "B95.8",
+         "ext": "",
+         "name": "Unspecified staphylococcus as the cause of diseases classified elsewhere"
+        }
+       ]
+      },
+      {
+       "value": "17741008",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J03.90": {
+     "name_us": "Acute tonsillitis, unspecified",
+     "valid": true,
+     "name": "Acute tonsillitis, unspecified",
+     "zh": "急性扁桃腺炎"
+    },
+    "J03.80": {
+     "name_us": "Acute tonsillitis due to other specified organisms",
+     "valid": true,
+     "name": "Acute tonsillitis due to other specified organisms",
+     "zh": "其他特定病原體所致急性扁桃腺炎"
+    },
+    "B96.89": {
+     "name_us": "Other specified bacterial agents as the cause of diseases classified elsewhere",
+     "valid": true,
+     "name": "Other specified bacterial agents as the cause of diseases classified elsewhere",
+     "zh": "歸類於他處其他特定細菌所致的疾病"
+    },
+    "J03.91": {
+     "name_us": "Acute recurrent tonsillitis, unspecified",
+     "valid": true,
+     "name": "Acute recurrent tonsillitis, unspecified",
+     "zh": "急性復發性扁桃腺炎"
+    },
+    "J03.00": {
+     "name_us": "Acute streptococcal tonsillitis, unspecified",
+     "valid": true,
+     "name": "Acute streptococcal tonsillitis, unspecified",
+     "zh": "急性鏈球菌扁桃腺炎"
+    },
+    "B95.8": {
+     "name_us": "Unspecified staphylococcus as the cause of diseases classified elsewhere",
+     "valid": true,
+     "name": "Unspecified staphylococcus as the cause of diseases classified elsewhere",
+     "zh": "歸類於他處未明示之葡萄球菌所致的疾病"
+    }
+   }
+  },
+  {
+   "id": "21522001",
+   "name": "Abdominal pain",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R10.9",
+     "ext": "",
+     "name": "Unspecified abdominal pain"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R10.9": {
+     "name_us": "Unspecified abdominal pain",
+     "valid": true,
+     "name": "Unspecified abdominal pain",
+     "zh": "腹痛"
+    }
+   }
+  },
+  {
+   "id": "22562004",
+   "name": "Contusion of scalp",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S00.03X",
+     "ext": "-",
+     "name": "Contusion of scalp"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "206204009",
+       "label": "Scalp bruising due to birth trauma",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "P12.3",
+         "ext": "",
+         "name": "Bruising of scalp due to birth injury"
+        }
+       ]
+      },
+      {
+       "value": "276624006",
+       "label": "Neonatal bruising of scalp",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "P12.3",
+         "ext": "",
+         "name": "Bruising of scalp due to birth injury"
+        }
+       ]
+      },
+      {
+       "value": "22562004",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S00.03X",
+         "ext": "A",
+         "name": "Contusion of scalp (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S00.03X",
+         "ext": "D",
+         "name": "Contusion of scalp (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S00.03X",
+         "ext": "S",
+         "name": "Contusion of scalp (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S00.03X-": {
+     "name_us": "Contusion of scalp",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S0003XA": {
+       "name": "Contusion of scalp, initial encounter",
+       "zh": "頭皮挫傷之初期照護"
+      },
+      "S0003XD": {
+       "name": "Contusion of scalp, subsequent encounter",
+       "zh": "頭皮挫傷之後續照護"
+      },
+      "S0003XS": {
+       "name": "Contusion of scalp, sequela",
+       "zh": "頭皮挫傷之後遺症"
+      }
+     }
+    },
+    "P12.3": {
+     "name_us": "Bruising of scalp due to birth injury",
+     "valid": true,
+     "name": "Bruising of scalp due to birth injury",
+     "zh": "生產傷害所致之頭皮瘀傷"
+    },
+    "S00.03XA": {
+     "name_us": "Contusion of scalp (initial encounter)",
+     "valid": true,
+     "name": "Contusion of scalp, initial encounter",
+     "zh": "頭皮挫傷之初期照護"
+    },
+    "S00.03XD": {
+     "name_us": "Contusion of scalp (subsequent encounter)",
+     "valid": true,
+     "name": "Contusion of scalp, subsequent encounter",
+     "zh": "頭皮挫傷之後續照護"
+    },
+    "S00.03XS": {
+     "name_us": "Contusion of scalp (sequela)",
+     "valid": true,
+     "name": "Contusion of scalp, sequela",
+     "zh": "頭皮挫傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "230461009",
+   "name": "Headache disorder",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R51.9",
+     "ext": "",
+     "name": "Headache, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R51.9": {
+     "name_us": "Headache, unspecified",
+     "valid": true,
+     "name": "Headache, unspecified",
+     "zh": "頭痛"
+    }
+   }
+  },
+  {
+   "id": "233604007",
+   "name": "Pneumonia",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J18.9",
+     "ext": "",
+     "name": "Pneumonia, unspecified organism"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Pneumonia, unspecified organism\"": [
+     "Code first, if applicable, associated influenza (J09.X1, J10.0-, J11.0-) Code also, if applicable, any associated condition such as: aspiration pneumonia (J69.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J18.9": {
+     "name_us": "Pneumonia, unspecified organism",
+     "valid": true,
+     "name": "Pneumonia, unspecified organism",
+     "zh": "肺炎，未明示病原體"
+    }
+   }
+  },
+  {
+   "id": "25064002",
+   "name": "Headache",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R51.9",
+     "ext": "",
+     "name": "Headache, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R51.9": {
+     "name_us": "Headache, unspecified",
+     "valid": true,
+     "name": "Headache, unspecified",
+     "zh": "頭痛"
+    }
+   }
+  },
+  {
+   "id": "25458004",
+   "name": "Acute gastritis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "K29.00",
+     "ext": "",
+     "name": "Acute gastritis without bleeding"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Acute gastritis\"": [
+     "Use additional code to identify: alcohol abuse and dependence (F10.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "K29.00": {
+     "name_us": "Acute gastritis without bleeding",
+     "valid": true,
+     "name": "Acute gastritis without bleeding",
+     "zh": "急性胃炎未伴有出血"
+    }
+   }
+  },
+  {
+   "id": "29857009",
+   "name": "Chest pain",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R07.9",
+     "ext": "",
+     "name": "Chest pain, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R07.9": {
+     "name_us": "Chest pain, unspecified",
+     "valid": true,
+     "name": "Chest pain, unspecified",
+     "zh": "胸痛"
+    }
+   }
+  },
+  {
+   "id": "35885006",
+   "name": "Hyperuricemia",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "E79.0",
+     "ext": "",
+     "name": "Hyperuricemia without signs of inflammatory arthritis and tophaceous disease"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "10406007",
+       "label": "Lesch - Nyhan syndrome",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "E79.1",
+         "ext": "",
+         "name": "Lesch-Nyhan syndrome"
+        }
+       ]
+      },
+      {
+       "value": "15933861000119105",
+       "label": "Gouty tophus of left ear",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "M1A.9XX",
+         "ext": "1",
+         "name": "Chronic gout, unspecified (with tophus (tophi))"
+        }
+       ]
+      },
+      {
+       "value": "15933941000119102",
+       "label": "Gouty tophus of right ear",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "M1A.9XX",
+         "ext": "1",
+         "name": "Chronic gout, unspecified (with tophus (tophi))"
+        }
+       ]
+      },
+      {
+       "value": "16005951000119104",
+       "label": "Gouty tophus of bilateral olecranon bursae",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "M1A.9XX",
+         "ext": "1",
+         "name": "Chronic gout, unspecified (with tophus (tophi))"
+        }
+       ]
+      },
+      {
+       "value": "46785007",
+       "label": "Familial juvenile hyperuricemic nephropathy",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "M10.9",
+         "ext": "",
+         "name": "Gout, unspecified"
+        }
+       ]
+      },
+      {
+       "value": "721840000",
+       "label": "Hyperuricemia , anemia , renal failure syndrome",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "E79.0",
+         "ext": "",
+         "name": "Hyperuricemia without signs of inflammatory arthritis and tophaceous disease"
+        },
+        {
+         "code": "D64.89",
+         "ext": "",
+         "name": "Other specified anemias"
+        },
+        {
+         "code": "N19",
+         "ext": "",
+         "name": "Unspecified kidney failure"
+        }
+       ]
+      },
+      {
+       "value": "15933901000119104",
+       "label": "Gouty tophus of bilateral ears",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "M1A.9XX",
+         "ext": "1",
+         "name": "Chronic gout, unspecified (with tophus (tophi))"
+        }
+       ]
+      },
+      {
+       "value": "35885006",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "E79.0": {
+     "name_us": "Hyperuricemia without signs of inflammatory arthritis and tophaceous disease",
+     "valid": true,
+     "name": "Hyperuricemia without signs of inflammatory arthritis and tophaceous disease",
+     "zh": "高尿酸血症未伴有關節炎及痛風石"
+    },
+    "E79.1": {
+     "name_us": "Lesch-Nyhan syndrome",
+     "valid": true,
+     "name": "Lesch-Nyhan syndrome",
+     "zh": "Lesch-Nyhan 氏症候群"
+    },
+    "M1A.9XX1": {
+     "name_us": "Chronic gout, unspecified (with tophus (tophi))",
+     "valid": true,
+     "name": "Chronic gout, unspecified, with tophus (tophi)",
+     "zh": "慢性痛風，伴有痛風石"
+    },
+    "M10.9": {
+     "name_us": "Gout, unspecified",
+     "valid": true,
+     "name": "Gout, unspecified",
+     "zh": "痛風"
+    },
+    "D64.89": {
+     "name_us": "Other specified anemias",
+     "valid": true,
+     "name": "Other specified anemias",
+     "zh": "其他特定之貧血"
+    },
+    "N19": {
+     "name_us": "Unspecified kidney failure",
+     "valid": true,
+     "name": "Unspecified kidney failure",
+     "zh": "腎衰竭"
+    }
+   }
+  },
+  {
+   "id": "363746003",
+   "name": "Acute pharyngitis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J02.9",
+     "ext": "",
+     "name": "Acute pharyngitis, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J02.9": {
+     "name_us": "Acute pharyngitis, unspecified",
+     "valid": true,
+     "name": "Acute pharyngitis, unspecified",
+     "zh": "急性咽炎"
+    }
+   }
+  },
+  {
+   "id": "386661006",
+   "name": "Fever",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R50.9",
+     "ext": "",
+     "name": "Fever, unspecified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P81.9",
+         "ext": "",
+         "name": "Disturbance of temperature regulation of newborn, unspecified"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "R50.9",
+         "ext": "",
+         "name": "Fever, unspecified"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R50.9": {
+     "name_us": "Fever, unspecified",
+     "valid": true,
+     "name": "Fever, unspecified",
+     "zh": "發燒"
+    },
+    "P81.9": {
+     "name_us": "Disturbance of temperature regulation of newborn, unspecified",
+     "valid": true,
+     "name": "Disturbance of temperature regulation of newborn, unspecified",
+     "zh": "新生兒體溫調節障礙"
+    }
+   }
+  },
+  {
+   "id": "396285007",
+   "name": "Bronchopneumonia",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J18.0",
+     "ext": "",
+     "name": "Bronchopneumonia, unspecified organism"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Pneumonia, unspecified organism\"": [
+     "Code first, if applicable, associated influenza (J09.X1, J10.0-, J11.0-) Code also, if applicable, any associated condition such as: aspiration pneumonia (J69.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J18.0": {
+     "name_us": "Bronchopneumonia, unspecified organism",
+     "valid": true,
+     "name": "Bronchopneumonia, unspecified organism",
+     "zh": "支氣管肺炎，未明示病原體"
+    }
+   }
+  },
+  {
+   "id": "40701000087109",
+   "name": "Traumatic amputation of right index finger",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S68.110",
+     "ext": "-",
+     "name": "Complete traumatic metacarpophalangeal amputation of right index finger"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "59871000087102",
+       "label": "Traumatic amputation of distal phalanx of right index finger",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S68.610",
+         "ext": "-",
+         "name": "Complete traumatic transphalangeal amputation of right index finger"
+        }
+       ]
+      },
+      {
+       "value": "59961000087103",
+       "label": "Traumatic amputation of right index finger at level of middle phalanx",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S68.610",
+         "ext": "-",
+         "name": "Complete traumatic transphalangeal amputation of right index finger"
+        }
+       ]
+      },
+      {
+       "value": "40701000087109",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S68.110",
+         "ext": "A",
+         "name": "Complete traumatic metacarpophalangeal amputation of right index finger (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S68.110",
+         "ext": "D",
+         "name": "Complete traumatic metacarpophalangeal amputation of right index finger (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S68.110",
+         "ext": "S",
+         "name": "Complete traumatic metacarpophalangeal amputation of right index finger (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S68.110-": {
+     "name_us": "Complete traumatic metacarpophalangeal amputation of right index finger",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S68110A": {
+       "name": "Complete traumatic metacarpophalangeal amputation of right index finger, initial encounter",
+       "zh": "右側食指掌指骨關節外傷性完全截斷之初期照護"
+      },
+      "S68110D": {
+       "name": "Complete traumatic metacarpophalangeal amputation of right index finger, subsequent encounter",
+       "zh": "右側食指掌指骨關節外傷性完全截斷之後續照護"
+      },
+      "S68110S": {
+       "name": "Complete traumatic metacarpophalangeal amputation of right index finger, sequela",
+       "zh": "右側食指掌指骨關節外傷性完全截斷之後遺症"
+      }
+     }
+    },
+    "S68.610-": {
+     "name_us": "Complete traumatic transphalangeal amputation of right index finger",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S68610A": {
+       "name": "Complete traumatic transphalangeal amputation of right index finger, initial encounter",
+       "zh": "右側食指經指骨處外傷性完全截斷之初期照護"
+      },
+      "S68610D": {
+       "name": "Complete traumatic transphalangeal amputation of right index finger, subsequent encounter",
+       "zh": "右側食指經指骨處外傷性完全截斷之後續照護"
+      },
+      "S68610S": {
+       "name": "Complete traumatic transphalangeal amputation of right index finger, sequela",
+       "zh": "右側食指經指骨處外傷性完全截斷之後遺症"
+      }
+     }
+    },
+    "S68.110A": {
+     "name_us": "Complete traumatic metacarpophalangeal amputation of right index finger (initial encounter)",
+     "valid": true,
+     "name": "Complete traumatic metacarpophalangeal amputation of right index finger, initial encounter",
+     "zh": "右側食指掌指骨關節外傷性完全截斷之初期照護"
+    },
+    "S68.110D": {
+     "name_us": "Complete traumatic metacarpophalangeal amputation of right index finger (subsequent encounter)",
+     "valid": true,
+     "name": "Complete traumatic metacarpophalangeal amputation of right index finger, subsequent encounter",
+     "zh": "右側食指掌指骨關節外傷性完全截斷之後續照護"
+    },
+    "S68.110S": {
+     "name_us": "Complete traumatic metacarpophalangeal amputation of right index finger (sequela)",
+     "valid": true,
+     "name": "Complete traumatic metacarpophalangeal amputation of right index finger, sequela",
+     "zh": "右側食指掌指骨關節外傷性完全截斷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "431857002",
+   "name": "Chronic kidney disease stage 4",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "N18.4",
+     "ext": "",
+     "name": "Chronic kidney disease, stage 4 (severe)"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Chronic kidney disease (CKD)\"": [
+     "Code first any associated: diabetic chronic kidney disease (E08.22, E09.22, E10.22, E11.22, E13.22) hypertensive chronic kidney disease (I12.-, I13.-) Use additional code, if applicable, to identify: associated cachexia (E88.A) kidney transplant status (Z94.0)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "N18.4": {
+     "name_us": "Chronic kidney disease, stage 4 (severe)",
+     "valid": true,
+     "name": "Chronic kidney disease, stage 4 (severe)",
+     "zh": "第四期慢性腎臟疾病(重度)"
+    }
+   }
+  },
+  {
+   "id": "44054006",
+   "name": "Type 2 diabetes mellitus",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "E11.9",
+     "ext": "",
+     "name": "Type 2 diabetes mellitus without complications"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Type 2 diabetes mellitus\"": [
+     "Use additional code to identify control using: injectable non-insulin antidiabetic drugs (Z79.85) insulin (Z79.4) oral antidiabetic drugs (Z79.84) oral hypoglycemic drugs (Z79.84)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "E11.9": {
+     "name_us": "Type 2 diabetes mellitus without complications",
+     "valid": true,
+     "name": "Type 2 diabetes mellitus without complications",
+     "zh": "第二型糖尿病，未伴有併發症"
+    }
+   }
+  },
+  {
+   "id": "442696006",
+   "name": "Influenza caused by Influenza A virus subtype H1N1",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J10.1",
+     "ext": "",
+     "name": "Influenza due to other identified influenza virus with other respiratory manifestations"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "142931000119100",
+       "label": "Pneumonia caused by Influenza A virus subtype H1N1",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "J10.00",
+         "ext": "",
+         "name": "Influenza due to other identified influenza virus with unspecified type of pneumonia"
+        }
+       ]
+      },
+      {
+       "value": "442696006",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Influenza due to other identified influenza virus with other respiratory manifestations\"": [
+     "Use additional code for associated pleural effusion, if applicable (J91.8) Use additional code for associated sinusitis, if applicable (J01.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J10.1": {
+     "name_us": "Influenza due to other identified influenza virus with other respiratory manifestations",
+     "valid": true,
+     "name": "Influenza due to other identified influenza virus with other respiratory manifestations",
+     "zh": "其他確認流感病毒所致流行性感冒併其他呼吸道表徵"
+    },
+    "J10.00": {
+     "name_us": "Influenza due to other identified influenza virus with unspecified type of pneumonia",
+     "valid": true,
+     "name": "Influenza due to other identified influenza virus with unspecified type of pneumonia",
+     "zh": "其他確認流感病毒所致流行性感冒併未明示類型肺炎"
+    }
+   }
+  },
+  {
+   "id": "443482000",
+   "name": "Hypertensive urgency",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "I16.0",
+     "ext": "",
+     "name": "Hypertensive urgency"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Hypertensive crisis\"": [
+     "Code also any identified hypertensive disease (I10-I15, I1A)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "I16.0": {
+     "name_us": "Hypertensive urgency",
+     "valid": true,
+     "name": "Hypertensive urgency",
+     "zh": "高血壓緊急狀況"
+    }
+   }
+  },
+  {
+   "id": "44465007",
+   "name": "Sprain of ankle",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S93.409",
+     "ext": "-",
+     "name": "Sprain of unspecified ligament of unspecified ankle"
+    }
+   ],
+   "questions": [
+    {
+     "type": "laterality",
+     "required": false,
+     "heading": "Laterality Refinement",
+     "text": "Refine laterality for the concept: Sprain of ankle:",
+     "options": [
+      {
+       "value": "S93.401",
+       "label": "Sprain of unspecified ligament of right ankle",
+       "rows": [
+        {
+         "code": "S93.401",
+         "ext": "A",
+         "name": "Sprain of unspecified ligament of right ankle (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "S93.402",
+       "label": "Sprain of unspecified ligament of left ankle",
+       "rows": [
+        {
+         "code": "S93.402",
+         "ext": "A",
+         "name": "Sprain of unspecified ligament of left ankle (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "S93.409",
+       "label": "Sprain of unspecified ligament of unspecified ankle",
+       "rows": [
+        {
+         "code": "S93.409",
+         "ext": "A",
+         "name": "Sprain of unspecified ligament of unspecified ankle (initial encounter)"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S93.409",
+         "ext": "A",
+         "name": "Sprain of unspecified ligament of unspecified ankle (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S93.409",
+         "ext": "D",
+         "name": "Sprain of unspecified ligament of unspecified ankle (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S93.409",
+         "ext": "S",
+         "name": "Sprain of unspecified ligament of unspecified ankle (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Dislocation and sprain of joints and ligaments at ankle, foot and toe level\"": [
+     "Code also any associated open wound"
+    ]
+   },
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S93.409-": {
+     "name_us": "Sprain of unspecified ligament of unspecified ankle",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S93409A": {
+       "name": "Sprain of unspecified ligament of unspecified ankle, initial encounter",
+       "zh": "未明示側性踝部韌帶扭傷之初期照護"
+      },
+      "S93409D": {
+       "name": "Sprain of unspecified ligament of unspecified ankle, subsequent encounter",
+       "zh": "未明示側性踝部韌帶扭傷之後續照護"
+      },
+      "S93409S": {
+       "name": "Sprain of unspecified ligament of unspecified ankle, sequela",
+       "zh": "未明示側性踝部韌帶扭傷之後遺症"
+      }
+     }
+    },
+    "S93.401A": {
+     "name_us": "Sprain of unspecified ligament of right ankle (initial encounter)",
+     "valid": true,
+     "name": "Sprain of unspecified ligament of right ankle, initial encounter",
+     "zh": "右側踝部韌帶扭傷之初期照護"
+    },
+    "S93.401-": {
+     "name_us": "Sprain of unspecified ligament of right ankle",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S93401A": {
+       "name": "Sprain of unspecified ligament of right ankle, initial encounter",
+       "zh": "右側踝部韌帶扭傷之初期照護"
+      },
+      "S93401D": {
+       "name": "Sprain of unspecified ligament of right ankle, subsequent encounter",
+       "zh": "右側踝部韌帶扭傷之後續照護"
+      },
+      "S93401S": {
+       "name": "Sprain of unspecified ligament of right ankle, sequela",
+       "zh": "右側踝部韌帶扭傷之後遺症"
+      }
+     }
+    },
+    "S93.402A": {
+     "name_us": "Sprain of unspecified ligament of left ankle (initial encounter)",
+     "valid": true,
+     "name": "Sprain of unspecified ligament of left ankle, initial encounter",
+     "zh": "左側踝部韌帶扭傷之初期照護"
+    },
+    "S93.402-": {
+     "name_us": "Sprain of unspecified ligament of left ankle",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S93402A": {
+       "name": "Sprain of unspecified ligament of left ankle, initial encounter",
+       "zh": "左側踝部韌帶扭傷之初期照護"
+      },
+      "S93402D": {
+       "name": "Sprain of unspecified ligament of left ankle, subsequent encounter",
+       "zh": "左側踝部韌帶扭傷之後續照護"
+      },
+      "S93402S": {
+       "name": "Sprain of unspecified ligament of left ankle, sequela",
+       "zh": "左側踝部韌帶扭傷之後遺症"
+      }
+     }
+    },
+    "S93.409A": {
+     "name_us": "Sprain of unspecified ligament of unspecified ankle (initial encounter)",
+     "valid": true,
+     "name": "Sprain of unspecified ligament of unspecified ankle, initial encounter",
+     "zh": "未明示側性踝部韌帶扭傷之初期照護"
+    },
+    "S93.409D": {
+     "name_us": "Sprain of unspecified ligament of unspecified ankle (subsequent encounter)",
+     "valid": true,
+     "name": "Sprain of unspecified ligament of unspecified ankle, subsequent encounter",
+     "zh": "未明示側性踝部韌帶扭傷之後續照護"
+    },
+    "S93.409S": {
+     "name_us": "Sprain of unspecified ligament of unspecified ankle (sequela)",
+     "valid": true,
+     "name": "Sprain of unspecified ligament of unspecified ankle, sequela",
+     "zh": "未明示側性踝部韌帶扭傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "46177005",
+   "name": "End-stage renal disease (disorder)",
+   "release": "20260901",
+   "not_in_map": true,
+   "default": [],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {}
+  },
+  {
+   "id": "54012000",
+   "name": "Posttraumatic headache",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "G44.309",
+     "ext": "",
+     "name": "Post-traumatic headache, unspecified, not intractable"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "122751000119105",
+       "label": "Acute posttraumatic headache",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.319",
+         "ext": "",
+         "name": "Acute post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "230477005",
+       "label": "Chronic post - traumatic headache",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.329",
+         "ext": "",
+         "name": "Chronic post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "290441000119105",
+       "label": "Intractable chronic headache following trauma",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.321",
+         "ext": "",
+         "name": "Chronic post-traumatic headache, intractable"
+        }
+       ]
+      },
+      {
+       "value": "722983008",
+       "label": "Headache due to injury of head and neck",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S09.90X",
+         "ext": "-",
+         "name": "Unspecified injury of head"
+        },
+        {
+         "code": "S19.9XX",
+         "ext": "-",
+         "name": "Unspecified injury of neck"
+        },
+        {
+         "code": "G44.309",
+         "ext": "",
+         "name": "Post-traumatic headache, unspecified, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "762354003",
+       "label": "Persistent headache due to and following injury of head",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.329",
+         "ext": "",
+         "name": "Chronic post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "1259064004",
+       "label": "Acute headache due to whiplash injury",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "S13.4XX",
+         "ext": "-",
+         "name": "Sprain of ligaments of cervical spine"
+        },
+        {
+         "code": "G44.319",
+         "ext": "",
+         "name": "Acute post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "1259065003",
+       "label": "Acute headache due to craniotomy",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G97.82",
+         "ext": "",
+         "name": "Other postprocedural complications and disorders of nervous system"
+        },
+        {
+         "code": "G44.319",
+         "ext": "",
+         "name": "Acute post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "762353009",
+       "label": "Acute headache due to traumatic injury of head",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.319",
+         "ext": "",
+         "name": "Acute post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "699694000",
+       "label": "Chronic post - concussion headache",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "G44.329",
+         "ext": "",
+         "name": "Chronic post-traumatic headache, not intractable"
+        }
+       ]
+      },
+      {
+       "value": "54012000",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "G44.309": {
+     "name_us": "Post-traumatic headache, unspecified, not intractable",
+     "valid": true,
+     "name": "Post-traumatic headache, unspecified, not intractable",
+     "zh": "外傷後頭痛，未明確定義型態，非頑固性"
+    },
+    "G44.319": {
+     "name_us": "Acute post-traumatic headache, not intractable",
+     "valid": true,
+     "name": "Acute post-traumatic headache, not intractable",
+     "zh": "急性外傷後頭痛，非頑固性"
+    },
+    "G44.329": {
+     "name_us": "Chronic post-traumatic headache, not intractable",
+     "valid": true,
+     "name": "Chronic post-traumatic headache, not intractable",
+     "zh": "慢性外傷後頭痛，非頑固性"
+    },
+    "G44.321": {
+     "name_us": "Chronic post-traumatic headache, intractable",
+     "valid": true,
+     "name": "Chronic post-traumatic headache, intractable",
+     "zh": "慢性外傷後頭痛，頑固性"
+    },
+    "S09.90X-": {
+     "name_us": "Unspecified injury of head",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S0990XA": {
+       "name": "Unspecified injury of head, initial encounter",
+       "zh": "頭部損傷之初期照護"
+      },
+      "S0990XD": {
+       "name": "Unspecified injury of head, subsequent encounter",
+       "zh": "頭部損傷之後續照護"
+      },
+      "S0990XS": {
+       "name": "Unspecified injury of head, sequela",
+       "zh": "頭部損傷之後遺症"
+      }
+     }
+    },
+    "S19.9XX-": {
+     "name_us": "Unspecified injury of neck",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S199XXA": {
+       "name": "Unspecified injury of neck, initial encounter",
+       "zh": "頸部損傷之初期照護"
+      },
+      "S199XXD": {
+       "name": "Unspecified injury of neck, subsequent encounter",
+       "zh": "頸部損傷之後續照護"
+      },
+      "S199XXS": {
+       "name": "Unspecified injury of neck, sequela",
+       "zh": "頸部損傷之後遺症"
+      }
+     }
+    },
+    "S13.4XX-": {
+     "name_us": "Sprain of ligaments of cervical spine",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S134XXA": {
+       "name": "Sprain of ligaments of cervical spine, initial encounter",
+       "zh": "頸椎韌帶扭傷之初期照護"
+      },
+      "S134XXD": {
+       "name": "Sprain of ligaments of cervical spine, subsequent encounter",
+       "zh": "頸椎韌帶扭傷之後續照護"
+      },
+      "S134XXS": {
+       "name": "Sprain of ligaments of cervical spine, sequela",
+       "zh": "頸椎韌帶扭傷之後遺症"
+      }
+     }
+    },
+    "G97.82": {
+     "name_us": "Other postprocedural complications and disorders of nervous system",
+     "valid": true,
+     "name": "Other postprocedural complications and disorders of nervous system",
+     "zh": "其他處置後的神經系統併發症及疾患"
+    }
+   }
+  },
+  {
+   "id": "54150009",
+   "name": "Upper respiratory infection",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J06.9",
+     "ext": "",
+     "name": "Acute upper respiratory infection, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Acute upper respiratory infection, unspecified\"": [
+     "Use additional code (B95-B97) to identify infectious agent, if known, such as: respiratory syncytial virus (RSV) (B97.4)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J06.9": {
+     "name_us": "Acute upper respiratory infection, unspecified",
+     "valid": true,
+     "name": "Acute upper respiratory infection, unspecified",
+     "zh": "急性上呼吸道感染"
+    }
+   }
+  },
+  {
+   "id": "59621000",
+   "name": "Essential hypertension",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "I10",
+     "ext": "",
+     "name": "Essential (primary) hypertension"
+    }
+   ],
+   "questions": [
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P29.2",
+         "ext": "",
+         "name": "Neonatal hypertension"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "I10",
+         "ext": "",
+         "name": "Essential (primary) hypertension"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "I10": {
+     "name_us": "Essential (primary) hypertension",
+     "valid": true,
+     "name": "Essential (primary) hypertension",
+     "zh": "本態性(原發性)高血壓"
+    },
+    "P29.2": {
+     "name_us": "Neonatal hypertension",
+     "valid": true,
+     "name": "Neonatal hypertension",
+     "zh": "新生兒高血壓"
+    }
+   }
+  },
+  {
+   "id": "6142004",
+   "name": "Influenza",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J11.1",
+     "ext": "",
+     "name": "Influenza due to unidentified influenza virus with other respiratory manifestations"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Influenza due to unidentified influenza virus with other respiratory manifestations\"": [
+     "Use additional code for associated pleural effusion, if applicable (J91.8) Use additional code for associated sinusitis, if applicable (J01.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J11.1": {
+     "name_us": "Influenza due to unidentified influenza virus with other respiratory manifestations",
+     "valid": true,
+     "name": "Influenza due to unidentified influenza virus with other respiratory manifestations",
+     "zh": "未確認流感病毒所致流行性感冒併其他呼吸道表徵"
+    }
+   }
+  },
+  {
+   "id": "68566005",
+   "name": "Urinary tract infectious disease",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "N39.0",
+     "ext": "",
+     "name": "Urinary tract infection, site not specified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P39.3",
+         "ext": "",
+         "name": "Neonatal urinary tract infection"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "N39.0",
+         "ext": "",
+         "name": "Urinary tract infection, site not specified"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Urinary tract infection, site not specified\"": [
+     "Use additional code (B95-B97), to identify infectious agent."
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "N39.0": {
+     "name_us": "Urinary tract infection, site not specified",
+     "valid": true,
+     "name": "Urinary tract infection, site not specified",
+     "zh": "未明示部位之泌尿道感染症"
+    },
+    "P39.3": {
+     "name_us": "Neonatal urinary tract infection",
+     "valid": true,
+     "name": "Neonatal urinary tract infection",
+     "zh": "新生兒泌尿道感染"
+    }
+   }
+  },
+  {
+   "id": "703138006",
+   "name": "Type II diabetes mellitus in remission",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "E11.A",
+     "ext": "",
+     "name": "Type 2 diabetes mellitus without complications in remission"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "E11.A": {
+     "name_us": "Type 2 diabetes mellitus without complications in remission",
+     "valid": false,
+     "name": "",
+     "zh": "",
+     "since": "2025",
+     "prev": "E11.9",
+     "prev_zh": "第二型糖尿病，未伴有併發症"
+    }
+   }
+  },
+  {
+   "id": "706882009",
+   "name": "Hypertensive crisis",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "I16.9",
+     "ext": "",
+     "name": "Hypertensive crisis, unspecified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "132721000119104",
+       "label": "Hypertensive emergency",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I16.1",
+         "ext": "",
+         "name": "Hypertensive emergency"
+        }
+       ]
+      },
+      {
+       "value": "443482000",
+       "label": "Hypertensive urgency",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I16.0",
+         "ext": "",
+         "name": "Hypertensive urgency"
+        }
+       ]
+      },
+      {
+       "value": "70272006",
+       "label": "Malignant hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I10",
+         "ext": "",
+         "name": "Essential (primary) hypertension"
+        }
+       ]
+      },
+      {
+       "value": "78975002",
+       "label": "Malignant essential hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I10",
+         "ext": "",
+         "name": "Essential (primary) hypertension"
+        }
+       ]
+      },
+      {
+       "value": "81626002",
+       "label": "Malignant hypertension in obstetric context",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "TBD",
+         "ext": "",
+         "name": "(Further information is required before mapping)"
+        }
+       ]
+      },
+      {
+       "value": "89242004",
+       "label": "Malignant secondary hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I15.9",
+         "ext": "",
+         "name": "Secondary hypertension, unspecified"
+        }
+       ]
+      },
+      {
+       "value": "10562009",
+       "label": "Malignant hypertension complicating AND / OR reason for care during childbirth",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "O10.02",
+         "ext": "",
+         "name": "Pre-existing essential hypertension complicating childbirth"
+        }
+       ]
+      },
+      {
+       "value": "29259002",
+       "label": "Malignant hypertension complicating AND/OR reason for care during pregnancy",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "O10.019",
+         "ext": "",
+         "name": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester"
+        }
+       ]
+      },
+      {
+       "value": "194783001",
+       "label": "Malignant secondary renovascular hypertension",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "I15.0",
+         "ext": "",
+         "name": "Renovascular hypertension"
+        }
+       ]
+      },
+      {
+       "value": "706882009",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "I16.9",
+         "ext": "",
+         "name": "Hypertensive crisis, unspecified"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Hypertensive crisis\"": [
+     "Code also any identified hypertensive disease (I10-I15, I1A)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "I16.9": {
+     "name_us": "Hypertensive crisis, unspecified",
+     "valid": true,
+     "name": "Hypertensive crisis, unspecified",
+     "zh": "高血壓危象"
+    },
+    "I16.1": {
+     "name_us": "Hypertensive emergency",
+     "valid": true,
+     "name": "Hypertensive emergency",
+     "zh": "高血壓急症"
+    },
+    "I16.0": {
+     "name_us": "Hypertensive urgency",
+     "valid": true,
+     "name": "Hypertensive urgency",
+     "zh": "高血壓緊急狀況"
+    },
+    "I10": {
+     "name_us": "Essential (primary) hypertension",
+     "valid": true,
+     "name": "Essential (primary) hypertension",
+     "zh": "本態性(原發性)高血壓"
+    },
+    "TBD": {
+     "name_us": "(Further information is required before mapping)",
+     "valid": null,
+     "name": "",
+     "zh": ""
+    },
+    "I15.9": {
+     "name_us": "Secondary hypertension, unspecified",
+     "valid": true,
+     "name": "Secondary hypertension, unspecified",
+     "zh": "續發性高血壓"
+    },
+    "O10.02": {
+     "name_us": "Pre-existing essential hypertension complicating childbirth",
+     "valid": true,
+     "name": "Pre-existing essential hypertension complicating childbirth",
+     "zh": "生產伴有既存本態性高血壓"
+    },
+    "O10.019": {
+     "name_us": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester",
+     "valid": true,
+     "name": "Pre-existing essential hypertension complicating pregnancy, unspecified trimester",
+     "zh": "妊娠伴有既存本態性高血壓，未明示妊娠期"
+    },
+    "I15.0": {
+     "name_us": "Renovascular hypertension",
+     "valid": true,
+     "name": "Renovascular hypertension",
+     "zh": "腎血管性續發性高血壓"
+    }
+   }
+  },
+  {
+   "id": "709044004",
+   "name": "Chronic kidney disease",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "N18.9",
+     "ext": "",
+     "name": "Chronic kidney disease, unspecified"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Chronic kidney disease (CKD)\"": [
+     "Code first any associated: diabetic chronic kidney disease (E08.22, E09.22, E10.22, E11.22, E13.22) hypertensive chronic kidney disease (I12.-, I13.-) Use additional code, if applicable, to identify: associated cachexia (E88.A) kidney transplant status (Z94.0)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "N18.9": {
+     "name_us": "Chronic kidney disease, unspecified",
+     "valid": true,
+     "name": "Chronic kidney disease, unspecified",
+     "zh": "慢性腎臟疾病"
+    }
+   }
+  },
+  {
+   "id": "735645009",
+   "name": "Contusion of head",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S00.93X",
+     "ext": "-",
+     "name": "Contusion of unspecified part of head"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S00.93X",
+         "ext": "A",
+         "name": "Contusion of unspecified part of head (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S00.93X",
+         "ext": "D",
+         "name": "Contusion of unspecified part of head (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S00.93X",
+         "ext": "S",
+         "name": "Contusion of unspecified part of head (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S00.93X-": {
+     "name_us": "Contusion of unspecified part of head",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S0093XA": {
+       "name": "Contusion of unspecified part of head, initial encounter",
+       "zh": "頭部未明示部位挫傷之初期照護"
+      },
+      "S0093XD": {
+       "name": "Contusion of unspecified part of head, subsequent encounter",
+       "zh": "頭部未明示部位挫傷之後續照護"
+      },
+      "S0093XS": {
+       "name": "Contusion of unspecified part of head, sequela",
+       "zh": "頭部未明示部位挫傷之後遺症"
+      }
+     }
+    },
+    "S00.93XA": {
+     "name_us": "Contusion of unspecified part of head (initial encounter)",
+     "valid": true,
+     "name": "Contusion of unspecified part of head, initial encounter",
+     "zh": "頭部未明示部位挫傷之初期照護"
+    },
+    "S00.93XD": {
+     "name_us": "Contusion of unspecified part of head (subsequent encounter)",
+     "valid": true,
+     "name": "Contusion of unspecified part of head, subsequent encounter",
+     "zh": "頭部未明示部位挫傷之後續照護"
+    },
+    "S00.93XS": {
+     "name_us": "Contusion of unspecified part of head (sequela)",
+     "valid": true,
+     "name": "Contusion of unspecified part of head, sequela",
+     "zh": "頭部未明示部位挫傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "735877005",
+   "name": "Open bite of toe",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S91.159",
+     "ext": "-",
+     "name": "Open bite of unspecified toe(s) without damage to nail"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S91.159",
+         "ext": "A",
+         "name": "Open bite of unspecified toe(s) without damage to nail (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S91.159",
+         "ext": "D",
+         "name": "Open bite of unspecified toe(s) without damage to nail (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S91.159",
+         "ext": "S",
+         "name": "Open bite of unspecified toe(s) without damage to nail (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Open wound of ankle, foot and toes\"": [
+     "Code also any associated wound infection"
+    ]
+   },
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S91.159-": {
+     "name_us": "Open bite of unspecified toe(s) without damage to nail",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S91159A": {
+       "name": "Open bite of unspecified toe(s) without damage to nail, initial encounter",
+       "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之初期照護"
+      },
+      "S91159D": {
+       "name": "Open bite of unspecified toe(s) without damage to nail, subsequent encounter",
+       "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之後續照護"
+      },
+      "S91159S": {
+       "name": "Open bite of unspecified toe(s) without damage to nail, sequela",
+       "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之後遺症"
+      }
+     }
+    },
+    "S91.159A": {
+     "name_us": "Open bite of unspecified toe(s) without damage to nail (initial encounter)",
+     "valid": true,
+     "name": "Open bite of unspecified toe(s) without damage to nail, initial encounter",
+     "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之初期照護"
+    },
+    "S91.159D": {
+     "name_us": "Open bite of unspecified toe(s) without damage to nail (subsequent encounter)",
+     "valid": true,
+     "name": "Open bite of unspecified toe(s) without damage to nail, subsequent encounter",
+     "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之後續照護"
+    },
+    "S91.159S": {
+     "name_us": "Open bite of unspecified toe(s) without damage to nail (sequela)",
+     "valid": true,
+     "name": "Open bite of unspecified toe(s) without damage to nail, sequela",
+     "zh": "未明示腳趾開放性咬傷未伴有趾甲損傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "74474003",
+   "name": "Gastrointestinal hemorrhage",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "K92.2",
+     "ext": "",
+     "name": "Gastrointestinal hemorrhage, unspecified"
+    }
+   ],
+   "questions": [
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P54.3",
+         "ext": "",
+         "name": "Other neonatal gastrointestinal hemorrhage"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "K92.2",
+         "ext": "",
+         "name": "Gastrointestinal hemorrhage, unspecified"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "K92.2": {
+     "name_us": "Gastrointestinal hemorrhage, unspecified",
+     "valid": true,
+     "name": "Gastrointestinal hemorrhage, unspecified",
+     "zh": "胃腸道出血"
+    },
+    "P54.3": {
+     "name_us": "Other neonatal gastrointestinal hemorrhage",
+     "valid": true,
+     "name": "Other neonatal gastrointestinal hemorrhage",
+     "zh": "其他新生兒胃腸出血"
+    }
+   }
+  },
+  {
+   "id": "772828001",
+   "name": "Influenza caused by Influenza A virus subtype H5N1",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "J09.X2",
+     "ext": "",
+     "name": "Influenza due to identified novel influenza A virus with other respiratory manifestations"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Influenza due to identified novel influenza A virus with other respiratory manifestations\"": [
+     "Use additional code, if applicable, for associated: pleural effusion (J91.8) sinusitis (J01.-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "J09.X2": {
+     "name_us": "Influenza due to identified novel influenza A virus with other respiratory manifestations",
+     "valid": true,
+     "name": "Influenza due to identified novel influenza A virus with other respiratory manifestations",
+     "zh": "確認新型流感A型病毒所致流行性感冒併其他呼吸道表徵"
+    }
+   }
+  },
+  {
+   "id": "82271004",
+   "name": "Injury of head",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S09.90X",
+     "ext": "-",
+     "name": "Unspecified injury of head"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S09.90X",
+         "ext": "A",
+         "name": "Unspecified injury of head (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S09.90X",
+         "ext": "D",
+         "name": "Unspecified injury of head (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S09.90X",
+         "ext": "S",
+         "name": "Unspecified injury of head (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S09.90X-": {
+     "name_us": "Unspecified injury of head",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S0990XA": {
+       "name": "Unspecified injury of head, initial encounter",
+       "zh": "頭部損傷之初期照護"
+      },
+      "S0990XD": {
+       "name": "Unspecified injury of head, subsequent encounter",
+       "zh": "頭部損傷之後續照護"
+      },
+      "S0990XS": {
+       "name": "Unspecified injury of head, sequela",
+       "zh": "頭部損傷之後遺症"
+      }
+     }
+    },
+    "S09.90XA": {
+     "name_us": "Unspecified injury of head (initial encounter)",
+     "valid": true,
+     "name": "Unspecified injury of head, initial encounter",
+     "zh": "頭部損傷之初期照護"
+    },
+    "S09.90XD": {
+     "name_us": "Unspecified injury of head (subsequent encounter)",
+     "valid": true,
+     "name": "Unspecified injury of head, subsequent encounter",
+     "zh": "頭部損傷之後續照護"
+    },
+    "S09.90XS": {
+     "name_us": "Unspecified injury of head (sequela)",
+     "valid": true,
+     "name": "Unspecified injury of head, sequela",
+     "zh": "頭部損傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "8513005",
+   "name": "Contusion of neck",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "S10.93X",
+     "ext": "-",
+     "name": "Contusion of unspecified part of neck"
+    }
+   ],
+   "questions": [
+    {
+     "type": "episode",
+     "required": true,
+     "heading": "Required Episode Refinement",
+     "options": [
+      {
+       "value": "initial encounter",
+       "suffix": "A",
+       "label": "initial encounter",
+       "rows": [
+        {
+         "code": "S10.93X",
+         "ext": "A",
+         "name": "Contusion of unspecified part of neck (initial encounter)"
+        }
+       ]
+      },
+      {
+       "value": "subsequent encounter",
+       "suffix": "D",
+       "label": "subsequent encounter",
+       "rows": [
+        {
+         "code": "S10.93X",
+         "ext": "D",
+         "name": "Contusion of unspecified part of neck (subsequent encounter)"
+        }
+       ]
+      },
+      {
+       "value": "sequela",
+       "suffix": "S",
+       "label": "sequela",
+       "rows": [
+        {
+         "code": "S10.93X",
+         "ext": "S",
+         "name": "Contusion of unspecified part of neck (sequela)"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {},
+   "advice": {
+    "advice": {
+     "advice": [
+      "POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE"
+     ]
+    }
+   },
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "S10.93X-": {
+     "name_us": "Contusion of unspecified part of neck",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "S1093XA": {
+       "name": "Contusion of unspecified part of neck, initial encounter",
+       "zh": "頸部挫傷之初期照護"
+      },
+      "S1093XD": {
+       "name": "Contusion of unspecified part of neck, subsequent encounter",
+       "zh": "頸部挫傷之後續照護"
+      },
+      "S1093XS": {
+       "name": "Contusion of unspecified part of neck, sequela",
+       "zh": "頸部挫傷之後遺症"
+      }
+     }
+    },
+    "S10.93XA": {
+     "name_us": "Contusion of unspecified part of neck (initial encounter)",
+     "valid": true,
+     "name": "Contusion of unspecified part of neck, initial encounter",
+     "zh": "頸部挫傷之初期照護"
+    },
+    "S10.93XD": {
+     "name_us": "Contusion of unspecified part of neck (subsequent encounter)",
+     "valid": true,
+     "name": "Contusion of unspecified part of neck, subsequent encounter",
+     "zh": "頸部挫傷之後續照護"
+    },
+    "S10.93XS": {
+     "name_us": "Contusion of unspecified part of neck (sequela)",
+     "valid": true,
+     "name": "Contusion of unspecified part of neck, sequela",
+     "zh": "頸部挫傷之後遺症"
+    }
+   }
+  },
+  {
+   "id": "8619003",
+   "name": "Infertile",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "TBD",
+     "ext": "",
+     "name": "(Further information is required before mapping)"
+    }
+   ],
+   "questions": [
+    {
+     "type": "sex",
+     "required": true,
+     "heading": "Required Sex Refinement",
+     "outcomes": {
+      "male": [
+       {
+        "code": "N46.9",
+        "ext": "",
+        "name": "Male infertility, unspecified"
+       }
+      ],
+      "female": [
+       {
+        "code": "N97.9",
+        "ext": "",
+        "name": "Female infertility, unspecified"
+       }
+      ]
+     }
+    }
+   ],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "TBD": {
+     "name_us": "(Further information is required before mapping)",
+     "valid": null,
+     "name": "",
+     "zh": ""
+    },
+    "N46.9": {
+     "name_us": "Male infertility, unspecified",
+     "valid": true,
+     "name": "Male infertility, unspecified",
+     "zh": "男性不孕症"
+    },
+    "N97.9": {
+     "name_us": "Female infertility, unspecified",
+     "valid": true,
+     "name": "Female infertility, unspecified",
+     "zh": "女性不孕"
+    }
+   }
+  },
+  {
+   "id": "9209005",
+   "name": "Acute abdomen",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "R10.0",
+     "ext": "",
+     "name": "Acute abdomen"
+    }
+   ],
+   "questions": [],
+   "notes": {},
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "R10.0": {
+     "name_us": "Acute abdomen",
+     "valid": true,
+     "name": "Acute abdomen",
+     "zh": "腹部急症"
+    }
+   }
+  }
+ ]
+}

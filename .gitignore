@@ -1,0 +1,5 @@
+node_modules/
+data/imagic-harvest/
+*.log
+.cache/
+__pycache__/

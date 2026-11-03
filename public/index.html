@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNOMED → ICD-10-CM 問答器</title>
+<meta name="description" content="輸入一個 SNOMED CT 概念，照 NLM I-MAGIC 的規則一題一題問到剩一個 ICD-10-CM 碼，並查台灣 2023 年版有沒有。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* 版面：單欄工作台；問答區一步一行往下長 */
+:root{
+  --bg:#F4F7F7; --surface:#FFFFFF; --surface2:#E9F0F0; --text:#15262B; --text2:#4A5F65; --muted:#6F8489; --border:#D3DEE0;
+  --accent:#0F6E73; --accent-ink:#0B585C; --accent-soft:#D6ECEC;
+  --ok:#1B7F4A; --ok-bg:#DCF3E5; --warn:#8A5A00; --warn-bg:#FBEFD2; --bad:#A3302B; --bad-bg:#F8E1DF;
+  --code-bg:#102B30; --code-ink:#E6F0F0; --inf-bg:#EEE9F8; --inf-ink:#53398F;
+  --sans:'Noto Sans TC',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'JetBrains Mono',Consolas,ui-monospace,monospace;
+  --shadow:0 1px 2px rgba(21,38,43,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1A1D; --surface:#142428; --surface2:#1B3035; --text:#E4EDEE; --text2:#B7C8CB; --muted:#8FA5A9; --border:#274046;
+    --accent:#5CC4C8; --accent-ink:#8ADADD; --accent-soft:#193B3F;
+    --ok:#5BD58F; --ok-bg:#153A28; --warn:#F2C25B; --warn-bg:#3E2E0A; --bad:#F0867F; --bad-bg:#44201E;
+    --code-bg:#08171A; --code-ink:#E6F0F0; --inf-bg:#2A1F4D; --inf-ink:#CDBDF5; --shadow:0 1px 2px rgba(0,0,0,.5); color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7}
+a{color:var(--accent-ink)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--accent-ink);color:#fff;padding-block:26px 20px}
+header.top h1{margin:0 0 6px;font-size:clamp(22px,3.2vw,30px);line-height:1.3;text-wrap:balance}
+header.top p{margin:0;opacity:.9;font-size:15px;max-width:62ch}
+.verbar{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;opacity:.85;margin-top:12px}
+.verbar b{font-weight:500;opacity:.8;margin-right:4px}
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:6px}
+nav.tabs button{flex:0 0 auto;border:0;background:transparent;color:var(--text2);font:inherit;font-size:14px;font-weight:500;padding:8px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--accent);color:#fff}
+nav.tabs button:hover:not([aria-selected="true"]){background:var(--surface2)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:22px 48px}
+.panel{display:none}.panel.on{display:block}
+section.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:0 0 16px;box-shadow:var(--shadow)}
+section.card>h2{margin:0 0 10px;font-size:19px;color:var(--accent-ink)}
+h3{margin:14px 0 6px;font-size:16px;font-weight:700}
+p{margin:6px 0}ul,ol{margin:6px 0;padding-left:1.4em}li{margin:3px 0}
+.lead{font-size:clamp(17px,2.2vw,20px);font-weight:700;line-height:1.5;margin:0 0 4px;text-wrap:balance}
+.tw{overflow-x:auto;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--surface2);text-align:left;padding:7px 10px;font-weight:700;border-bottom:2px solid var(--border)}
+td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.code{font-family:var(--mono);font-weight:700}
+.inf{display:inline-block;font-size:11px;line-height:1;padding:3px 6px;border-radius:5px;background:var(--inf-bg);color:var(--inf-ink);font-weight:700;vertical-align:middle;margin-right:4px}
+.infbox{background:var(--inf-bg);border:1px dashed var(--inf-ink);border-radius:10px;padding:8px 14px;margin:10px 0}
+.warn{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:8px 14px;margin:10px 0}
+.entry{font-family:var(--mono);font-size:13px;line-height:1.55;white-space:pre;overflow-x:auto;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:12px 14px;margin:8px 0}
+.entry b{color:#9ADFE2}.entry i{color:#9DB4B8;font-style:normal}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;font-weight:500;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}.pill.warn{background:var(--warn-bg);color:var(--warn)}.pill.bad{background:var(--bad-bg);color:var(--bad)}.pill.grey{background:var(--surface2);color:var(--text2)}.pill.live{background:var(--inf-bg);color:var(--inf-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn{font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent-ink)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:relative}
+.bar input[type=text],.bar input[type=number],.bar select{font:inherit;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);min-width:0}
+#q{font-size:16px;width:min(100%,420px)}
+.sugg{position:absolute;top:100%;left:0;z-index:5;width:min(100%,560px);background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-height:320px;overflow:auto;display:none}
+.sugg button{display:flex;gap:10px;width:100%;text-align:left;font:inherit;font-size:14px;padding:8px 12px;border:0;border-bottom:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer}
+.sugg button:hover{background:var(--accent-soft)}
+.sugg .id{font-family:var(--mono);color:var(--muted);min-width:14ch}
+.patient{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:14px;color:var(--text2);margin-top:8px}
+.patient label{display:flex;gap:6px;align-items:center}
+.patient input[type=number]{width:80px;font:inherit;padding:6px 8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
+.patient select{font:inherit;padding:6px 8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
+.flow{display:grid;gap:10px;margin-top:14px}
+.concept{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface2);border-radius:0 10px 10px 0}
+.concept .id{font-family:var(--mono);color:var(--text2)}
+.step{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-size:15px}
+.step .n{width:24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.step small{display:block;color:var(--muted);font-size:13px}
+.step button{font:inherit;font-size:13px;border:1px solid var(--border);background:transparent;color:var(--text2);border-radius:6px;padding:2px 8px;cursor:pointer}
+.ask{border:2px solid var(--accent);border-radius:12px;padding:12px 14px;background:var(--surface)}
+.ask .q{font-weight:700;margin:0 0 8px}
+.ask .req{font-size:12px;color:var(--warn);margin-left:6px;font-weight:500}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{text-align:left;font:inherit;font-size:15px;padding:9px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.opt:hover{border-color:var(--accent);background:var(--accent-soft)}
+.opt .code{color:var(--accent-ink)}.opt small{color:var(--muted);font-size:13px}
+.result{border-radius:12px;padding:14px 16px;background:var(--surface);border:1px solid var(--border)}
+.result.done{border-color:var(--ok)}
+.result h3{margin:0 0 8px;font-size:15px;color:var(--text2);font-weight:500;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.codes{display:grid;gap:10px}
+.coderow{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;padding:10px 12px;border-radius:10px;background:var(--surface2)}
+.coderow .big{font-family:var(--mono);font-size:clamp(24px,4vw,34px);font-weight:700;line-height:1.1;color:var(--accent-ink)}
+.coderow .big.bad{color:var(--bad)}
+.coderow .us{color:var(--text2);font-size:14px}
+.coderow .twl{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:14px}
+.kids{grid-column:1/-1;font-size:13px;color:var(--text2)}.kids .code{margin-right:6px}
+.copy{font:inherit;font-size:12px;border:1px solid var(--border);background:transparent;color:var(--text2);border-radius:6px;padding:2px 8px;cursor:pointer}
+details{margin-top:8px;font-size:14px}summary{cursor:pointer;color:var(--accent-ink)}
+.steps3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.steps3 div{background:var(--surface2);border-radius:10px;padding:10px 12px;font-size:14px;min-width:0}
+.steps3 b{display:block;color:var(--accent-ink);margin-bottom:2px}
+.busy{color:var(--muted);font-size:14px}
+footer{color:var(--muted);font-size:13px;padding:18px 0 40px;border-top:1px solid var(--border)}
+tr.clk{cursor:pointer}tr.clk:hover td{background:var(--accent-soft)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+@media (max-width:600px){.step{grid-template-columns:28px 1fr}.step button{grid-column:2}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>SNOMED → ICD-10-CM 問答器</h1>
+  <p>輸入一個 SNOMED CT 概念，照 NLM I-MAGIC 的規則一題一題問到剩一個 ICD-10-CM 碼，再查這個碼台灣 2023 年版有沒有。人用這頁，程式打 <code>/api</code>，規則同一份。</p>
+  <div class="verbar"><span><b>離線規則</b><span id="v-off">—</span></span><span><b>直通</b><span id="v-live">—</span></span><span><b>台灣碼表</b>ICD-10-CM 2023 年版（114.1.1 起）</span></div>
+</div></header>
+<nav class="tabs"><div class="wrap" role="tablist">
+  <button role="tab" data-tab="try" aria-selected="true">試試看</button>
+  <button role="tab" data-tab="how" aria-selected="false">怎麼判斷</button>
+  <button role="tab" data-tab="list" aria-selected="false">離線涵蓋的概念</button>
+  <button role="tab" data-tab="api" aria-selected="false">API</button>
+</div></nav>
+<main class="wrap">
+
+<div class="panel on" id="p-try">
+  <section class="card">
+    <p class="lead">一個 SNOMED 概念不一定對到一個 ICD 碼。對照表寫著「要先知道什麼」：性別、年齡、更明確的診斷、左右側、第幾次就醫。問完就剩一個碼。</p>
+    <div class="bar">
+      <input id="q" type="text" placeholder="打名稱（英文）或 SNOMED CT ID，例如 ankle sprain 或 44465007" aria-label="搜尋概念" autocomplete="off">
+      <button class="btn" id="go">查</button>
+      <button class="btn ghost" id="reset">重來</button>
+      <div class="sugg" id="sugg"></div>
+    </div>
+    <div class="chips" id="demo-chips"></div>
+    <div class="patient">
+      <span>病人資料（可先填，I-MAGIC 也是先看這兩個）：</span>
+      <label>性別 <select id="p-sex"><option value="">未填</option><option value="male">男</option><option value="female">女</option></select></label>
+      <label>年齡 <input id="p-age" type="number" min="0" step="1" placeholder="—"> <select id="p-unit"><option value="365">歲</option><option value="30">個月</option><option value="1">天</option></select></label>
+    </div>
+    <div class="flow" id="flow"><p class="busy">上面搜尋或貼 ID，或點一個示範。</p></div>
+  </section>
+</div>
+
+<div class="panel" id="p-how">
+  <section class="card">
+    <h2>I-MAGIC 的做法：先看病人資料，不夠才問</h2>
+    <p>NLM 的 I-MAGIC 示範頁說明：用規則式的 SNOMED CT → ICD-10-CM 對照表，先看概念加上病人的年齡和性別能不能決定一個有效的碼；不能就問使用者（必填追問）。就算有碼了，對照表還可能提供選填追問，例如左右側、孕期，或換成更明確的 SNOMED 概念。</p>
+    <div class="steps3">
+      <div><b>1 病人資料</b>性別、年齡。缺了而規則需要，就是必填題。</div>
+      <div><b>2 更明確的診斷</b>列出這個概念底下更細的概念，有就換成那個。選填。</div>
+      <div><b>3 左右側</b>ICD 碼分左右的才問。選填，不知道就「未明示」。</div>
+      <div><b>4 第 7 碼</b>損傷章的碼一定要：A 初次、D 後續、S 後遺症。必填。</div>
+      <div><b>5 出碼</b>剩一個碼，或兩個都要填的碼。</div>
+    </div>
+    <h3>兩種模式</h3>
+    <ul>
+      <li><b>離線：</b>用 <code>rules.json</code>。裡面的碼是把每個概念在各種條件下丟給 I-MAGIC 示範頁、把回答記下來整理成的，不是 NLM 官方對照檔（檔案要 UMLS 帳號）。目前只有少數概念。</li>
+      <li><b>直通：</b>概念不在離線規則裡時，伺服器現場把你的答案帶去問 I-MAGIC，回的就是官方當下的結果。要能連到 NLM，每題約 1 到 2 秒。</li>
+    </ul>
+    <h3>台灣查核</h3>
+    <p>I-MAGIC 用美國現行版碼表；台灣自 2025-01-01 起用 2023 年版。每個結果碼都查 CMS 2023 年版碼表：有就附健保署查詢系統的中文名；沒有就列同一 stem 底下 2023 年版有的碼，以及 CMS 轉換表寫的「這個新碼之前對應哪個碼」。</p>
+    <div class="infbox"><span class="inf">注意</span>這是個人練習專案。I-MAGIC 一次會看問題清單上的所有概念互相精煉，這裡一次只看一個概念。</div>
+  </section>
+</div>
+
+<div class="panel" id="p-list">
+  <section class="card">
+    <h2>離線規則涵蓋的概念</h2>
+    <p style="color:var(--text2);font-size:14px">點一列就帶到「試試看」。「會問」是沒給病人資料時會問的題，星號是必填。</p>
+    <div class="tw"><table id="list-tab"><tr><th>SNOMED CT</th><th>名稱</th><th>預設碼</th><th>會問</th></tr></table></div>
+  </section>
+</div>
+
+<div class="panel" id="p-api">
+  <section class="card">
+    <h2>API</h2>
+    <p>伺服器在本機，回 JSON，沒有驗證。agent 的用法：丟 ID 進來，<code>status</code> 是 <code>need_info</code> 就看 <code>question</code>，把答案加成參數再呼叫一次，直到 <code>done</code>。</p>
+    <div class="entry"><b>GET</b> /api/map/8619003
+<i>→ {"status":"need_info","question":{"type":"sex",...},"rows":[{"code":"TBD",...}]}</i>
+<b>GET</b> /api/map/8619003?sex=female
+<i>→ {"status":"done","rows":[{"code":"N97.9","ext":"","name":"Female infertility, unspecified","tw_valid":true,"tw_zh":"女性不孕"}]}</i>
+<b>GET</b> /api/map/44465007?laterality=S93.402&amp;episode=D
+<b>GET</b> /api/map/59621000?age=70            <i>age 歲，或 age_days 天</i>
+<b>GET</b> /api/map/267036007?mode=live        <i>mode: auto（預設）| offline | live</i>
+<b>GET</b> /api/search?q=ankle%20sprain        <i>名稱找概念（tx.fhir.org）</i>
+<b>GET</b> /api/tw/E11.A                       <i>台灣 2023 年版查核</i>
+<b>GET</b> /api/concepts · /api/health</div>
+    <h3>回傳欄位</h3>
+    <ul>
+      <li><code>status</code>：<code>done</code>（1–2 個碼）、<code>multiple</code>、<code>need_info</code>、<code>not_in_map</code>（I-MAGIC 不收）、<code>unknown</code>（離線沒有且直通關閉）</li>
+      <li><code>mode</code>：<code>offline</code> 或 <code>live</code>；<code>release</code>：I-MAGIC 的 Map 版本</li>
+      <li><code>rows[]</code>：<code>code</code>、<code>ext</code>（第 7 碼）、<code>name</code>、<code>tw_valid</code>、<code>tw_zh</code>、<code>tw_children</code>、<code>tw_prev</code></li>
+      <li><code>question</code>：<code>type</code>（sex / age / refine / laterality / episode）、<code>required</code>、<code>options[]</code></li>
+    </ul>
+  </section>
+</div>
+</main>
+<footer><div class="wrap">規則：NLM I-MAGIC 示範頁（SNOMED CT to ICD-10-CM Map）· 台灣碼表：CMS ICD-10-CM FY2023 碼表、健保署 2023 年版查詢系統、CMS FY2027 轉換表 · 名稱搜尋：tx.fhir.org</div></footer>
+
+<script>
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const api=async(u)=>{const r=await fetch(u);const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j;};
+  const DEMO=[['8619003','不孕：先問性別'],['44465007','踝扭傷：左右側、第 7 碼'],['44054006','第 2 型糖尿病：直接出碼'],['703138006','糖尿病緩解：台灣沒有這個碼']];
+  const EPI={A:'初次就醫（initial encounter）',D:'後續就醫（subsequent encounter）',S:'後遺症（sequela）'};
+  const QT={sex:'性別',age:'年齡',refine:'更明確的診斷',laterality:'左右側',episode:'第 7 碼'};
+  let CONCEPTS=[];
+
+  const tabs=$$('nav.tabs button');
+  function show(n){tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===n));$$('.panel').forEach(p=>p.classList.toggle('on',p.id==='p-'+n));}
+  tabs.forEach(b=>b.addEventListener('click',()=>{show(b.dataset.tab);window.scrollTo({top:0});}));
+
+  /* ---------- state ---------- */
+  const state={id:null,answers:{},busy:false};
+  const ORDER=['sex','age','refine','laterality','episode'];
+  function patient(){const a=state.answers;const s=$('#p-sex').value;if(s)a.sex=s;else delete a.sex;const n=parseFloat($('#p-age').value);if(!isNaN(n))a.age_days=Math.round(n*Number($('#p-unit').value));else delete a.age_days;}
+  function start(id){state.id=String(id).trim();state.answers={};patient();$('#q').value=state.id;hideSugg();render();show('try');}
+  function undo(step){const i=ORDER.indexOf(step);ORDER.slice(i).forEach(k=>{if(k==='age')delete state.answers.age_days;else delete state.answers[k];});if(step==='sex')$('#p-sex').value='';if(step==='age')$('#p-age').value='';render();}
+  function qs(){const a=state.answers,p=new URLSearchParams();if(a.sex)p.set('sex',a.sex);if(a.age_days!==undefined)p.set('age_days',a.age_days);for(const k of['refine','laterality','episode'])if(a[k])p.set(k,a[k]);return p.toString();}
+  function fmtAge(d){if(d<60)return d+' 天';if(d<730)return Math.floor(d/30)+' 個月';return Math.floor(d/365)+' 歲';}
+
+  /* ---------- search ---------- */
+  DEMO.forEach(([id,l])=>{const b=document.createElement('button');b.className='chip';b.textContent=l;b.addEventListener('click',()=>start(id));$('#demo-chips').appendChild(b);});
+  let timer=null;
+  function hideSugg(){$('#sugg').style.display='none';}
+  $('#q').addEventListener('input',()=>{clearTimeout(timer);const v=$('#q').value.trim();if(/^\d{6,18}$/.test(v)||v.length<2){hideSugg();return;}timer=setTimeout(()=>suggest(v),350);});
+  $('#q').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=$('#q').value.trim();if(/^\d{6,18}$/.test(v))start(v);else suggest(v);}if(e.key==='Escape')hideSugg();});
+  $('#go').addEventListener('click',()=>{const v=$('#q').value.trim();if(/^\d{6,18}$/.test(v))start(v);else if(v.length>=2)suggest(v);});
+  $('#reset').addEventListener('click',()=>{state.id=null;state.answers={};$('#q').value='';render();});
+  document.addEventListener('click',e=>{if(!e.target.closest('.bar'))hideSugg();});
+  async function suggest(v){const box=$('#sugg');box.innerHTML='<button disabled>搜尋中…</button>';box.style.display='block';
+    try{const r=await api('/api/search?q='+encodeURIComponent(v));
+      box.innerHTML=r.results.length?r.results.map(x=>`<button data-id="${esc(x.id)}"><span class="id">${esc(x.id)}</span><span>${esc(x.name)}</span>${x.offline?'<span class="pill grey">離線</span>':''}</button>`).join(''):'<button disabled>沒有結果（搜尋只支援英文名稱）</button>';
+      $$('button[data-id]',box).forEach(b=>b.addEventListener('click',()=>start(b.dataset.id)));
+    }catch(e){box.innerHTML=`<button disabled>搜尋失敗：${esc(e.message)}</button>`;}}
+  ['#p-sex','#p-age','#p-unit'].forEach(s=>$(s).addEventListener('change',()=>{patient();if(state.id)render();}));
+
+  /* ---------- render ---------- */
+  function twPill(r){ if(r.tw_valid===true)return `<span class="pill ok">台灣 2023 年版有</span><span>${esc(r.tw_zh||r.tw_name||'')}</span>`;
+    if(r.tw_valid===false)return `<span class="pill bad">台灣 2023 年版沒有這個碼</span>`;
+    if(r.tw_note==='7th character required')return `<span class="pill warn">缺第 7 碼</span>`;return `<span class="pill grey">未查核</span>`;}
+  async function render(){const f=$('#flow');if(!state.id){f.innerHTML='<p class="busy">上面搜尋或貼 ID，或點一個示範。</p>';return;}
+    f.innerHTML='<p class="busy">查詢中…（直通模式要問 NLM，約 1 到 3 秒）</p>';
+    let r;try{r=await api('/api/map/'+state.id+'?'+qs());}catch(e){f.innerHTML=`<div class="result">查詢失敗：${esc(e.message)}</div>`;return;}
+    const modePill=`<span class="pill ${r.mode==='live'?'live':'grey'}">${r.mode==='live'?'直通 I-MAGIC':'離線規則'}${r.release?' · Map '+esc(r.release):''}</span>`;
+    if(r.status==='unknown'){f.innerHTML=`<div class="result"><b class="mono">${esc(state.id)}</b> 不在離線規則裡，而且直通模式關閉。</div>`;return;}
+    if(r.status==='not_in_map'){f.innerHTML=`<div class="concept"><b>${esc(r.name||'')}</b><span class="id">${esc(state.id)}</span>${modePill}</div><div class="result"><b>I-MAGIC 不收這個概念</b>：它不在 SNOMED CT to ICD-10-CM Map 裡。要先換成對照表有的概念，例如它的上層或同義概念。</div>`;return;}
+    let h=`<div class="concept"><b>${esc(r.name||'')}</b><span class="id">${esc(r.id||state.id)}</span>${modePill}</div>`;
+    // answered steps
+    const a=state.answers,steps=[];
+    if(a.sex)steps.push(['sex',`性別 = ${a.sex==='male'?'男':'女'}`]);
+    if(a.age_days!==undefined)steps.push(['age',`年齡 ${fmtAge(a.age_days)}`]);
+    if(a.refine)steps.push(['refine',a.refine==='none'?'更明確的診斷：都不是，維持原診斷':`更明確的診斷：${esc(a.refine)}`]);
+    if(a.laterality)steps.push(['laterality',`左右側：${esc(a.laterality)}`]);
+    if(a.episode)steps.push(['episode',`第 7 碼：${EPI[a.episode]}`]);
+    const traceNote=(r.trace||[]).filter(t=>t.note).map(t=>t.note).join(' ');
+    steps.forEach(([k,t],i)=>{h+=`<div class="step"><span class="n">${i+1}</span><div>${t}${k==='age'&&traceNote?`<small>${esc(traceNote)}</small>`:''}</div><button data-undo="${k}">改</button></div>`;});
+    if(r.status==='need_info'&&r.question){const q=r.question;const label={sex:'這個概念對男女可能對到不同的碼，請選性別',age:'年齡會影響結果，請輸入年齡',refine:'有沒有下面哪個更明確的診斷？沒有就選「都不是」',laterality:'哪一側？不知道就選「未明示」',episode:'損傷碼一定要第 7 碼，請選這次是哪種就醫'}[q.type]||q.text;
+      h+=`<div class="ask"><p class="q">${esc(label)}${q.required?'<span class="req">必填</span>':'<span class="req" style="color:var(--muted)">選填，為了剩一個碼</span>'}</p>`;
+      if(q.type==='age'){h+=`<div class="bar"><input type="number" id="ask-age" min="0" step="1" placeholder="數字" aria-label="年齡"> <select id="ask-unit"><option value="365">歲</option><option value="30">個月</option><option value="1">天</option></select> <button class="btn" id="ask-age-go">確定</button></div>`;
+        if(q.intervals)h+=`<div class="kids" style="margin-top:8px">離線規則探測到的分段：${q.intervals.map(s=>`${esc(s.from)}起 → <span class="code">${s.rows.map(x=>esc(x.code+x.ext)).join('、')}</span>`).join('；')}</div>`;}
+      else{const opts=q.type==='sex'?[{value:'male',label:'男'},{value:'female',label:'女'}]:q.type==='episode'?Object.entries(EPI).map(([v,l])=>({value:v,label:l})):q.options.map(o=>o.value==='none'?{value:'none',label:'都不是，維持原診斷'}:o);
+        h+=`<div class="opts">${opts.map(o=>`<button class="opt" data-q="${q.type}" data-v="${esc(o.value)}"><span>${esc(o.label)}</span>${o.rows?`<span class="code">→ ${o.rows.map(x=>esc(x.code+x.ext)).join('、')}</span>`:''}</button>`).join('')}</div>`;}
+      h+='</div>';}
+    const title=r.status==='done'?(r.rows.length>1?'結果：兩個碼都要填':'結果：剩一個碼'):r.status==='multiple'?'結果：還有多個碼':'目前的碼（還沒問完）';
+    h+=`<div class="result ${r.status==='done'?'done':''}"><h3>${title}${r.status==='done'?'<button class="copy" id="copy-all">複製碼</button>':''}</h3><div class="codes">`;
+    (r.rows||[]).forEach(x=>{h+=`<div class="coderow"><span class="big ${x.tw_valid===false?'bad':''}">${esc(x.code+(x.ext||''))}</span><span class="us">${esc(x.name)}</span><div class="twl">${twPill(x)}</div>`;
+      if(x.tw_children&&x.tw_children.length&&(x.tw_valid===false||x.ext==='-'))h+=`<div class="kids">2023 年版同一 stem 有：${x.tw_children.map(k=>`<span class="code">${esc(k.code)}</span>${esc(k.zh||k.name)}`).join('、')}</div>`;
+      if(x.tw_prev)h+=`<div class="kids">美國 FY${esc(x.tw_prev.since)} 才新增；CMS 轉換表寫它之前對應 <span class="code">${esc(x.tw_prev.code)}</span>${x.tw_prev.zh?'（'+esc(x.tw_prev.zh)+'）':''}，台灣申報可用這個。</div>`;
+      h+='</div>';});
+    h+='</div>';
+    const notes=Object.entries(r.notes||{}),adv=Array.isArray(r.advice)?r.advice:((r.advice&&r.advice.advice)||[]);
+    if(notes.length||adv.length)h+=`<details><summary>ICD 註記與對照表建議</summary>${notes.map(([k,v])=>`<p><b>${esc(k)}</b>：${esc(v.join(' '))}</p>`).join('')}${adv.length?`<p><b>Map Advice</b>：${esc(adv.join('；'))}</p>`:''}</details>`;
+    const f0=a.sex==='male'?'0':a.sex==='female'?'1':'';
+    h+=`<p style="font-size:13px;color:var(--muted);margin:10px 0 0">到 I-MAGIC 核對：<a href="https://imagic.nlm.nih.gov/imagic/?v=6&from-tab=demo&pat=My+Patient&f=${f0}&dob=&pdraft=${esc(state.id)}&pdone=1" target="_blank" rel="noopener">開啟</a>（先開過 I-MAGIC 首頁一次才有 session）</p></div>`;
+    f.innerHTML=h;
+    $$('[data-undo]',f).forEach(b=>b.addEventListener('click',()=>undo(b.dataset.undo)));
+    $$('.opt',f).forEach(b=>b.addEventListener('click',()=>{state.answers[b.dataset.q]=b.dataset.v;if(b.dataset.q==='sex')$('#p-sex').value=b.dataset.v;render();}));
+    const ag=$('#ask-age-go',f);if(ag)ag.addEventListener('click',()=>{const n=parseFloat($('#ask-age').value);if(isNaN(n))return;const u=Number($('#ask-unit').value);state.answers.age_days=Math.round(n*u);$('#p-age').value=n;$('#p-unit').value=String(u);render();});
+    const cp=$('#copy-all',f);if(cp)cp.addEventListener('click',()=>{const t=(r.rows||[]).map(x=>x.code+(x.ext||'')).join(' ');navigator.clipboard.writeText(t).then(()=>{cp.textContent='已複製';}).catch(()=>{cp.textContent=t;});});
+  }
+
+  /* ---------- list & health ---------- */
+  api('/api/concepts').then(j=>{CONCEPTS=j.concepts;$('#v-off').textContent=`${CONCEPTS.length} 個概念（${j.compiled}）`;
+    $('#list-tab').insertAdjacentHTML('beforeend',CONCEPTS.map(c=>`<tr class="clk" data-id="${c.id}"><td class="mono">${esc(c.id)}</td><td>${esc(c.name)}</td><td class="code">${c.not_in_map?'<span class="pill bad">I-MAGIC 不收</span>':c.default.map(esc).join('、')}</td><td>${c.questions.map(q=>`<span class="pill ${q.required?'warn':'grey'}">${QT[q.type]}${q.required?'*':''}</span>`).join(' ')||'<span style="color:var(--muted)">不問</span>'}</td></tr>`).join(''));
+    $$('#list-tab tr.clk').forEach(tr=>tr.addEventListener('click',()=>start(tr.dataset.id)));}).catch(()=>{$('#v-off').textContent='載入失敗';});
+  api('/api/health').then(h=>{$('#v-live').textContent=h.live?'開（問 NLM I-MAGIC）':'關';}).catch(()=>{$('#v-live').textContent='伺服器沒回應';});
+})();
+</script>
+</body>
+</html>
