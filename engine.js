@@ -3,6 +3,7 @@
  *   {status:'unknown'}                                   概念不在規則資料裡
  *   {status:'need_info', question:{...}, rows, trace}    還要問一題
  *   {status:'done'|'multiple', rows:[...], trace}         rows ≤ 2 → done
+ *   {status:'no_target', rows:[], trace}                   概念在對照表裡，但沒有對應的 ICD-10-CM 碼
  * answers：{sex:'male'|'female', age_days:數字, refine:SCTID|'none', laterality:ICD碼, episode:'A'|'D'|'S'}
  * 判斷順序和 I-MAGIC 相同：性別、年齡（病人資料）→ 更明確的診斷 → 左右側 → 第 7 碼。 */
 (function (root, factory) {
@@ -90,7 +91,7 @@
       }
     }
     rows = rows.map(r => Object.assign({}, r, tw(c, r)));
-    const status = pending.length ? 'need_info' : (rows.length <= 2 ? 'done' : 'multiple');
+    const status = pending.length ? 'need_info' : (rows.length === 0 ? 'no_target' : rows.length <= 2 ? 'done' : 'multiple');
     return { status, id: c.id, name: c.name, rows, question: pending[0] || null, trace, notes: c.notes, advice: c.advice, release: c.release };
   }
 

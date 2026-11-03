@@ -58,8 +58,11 @@ agent  ───┘       │       ─► scripts/live.py            live query
 
 Agent loop: call `/api/map/{id}`; while `status` is `need_info`, read `question` (type `sex`,
 `age`, `refine`, `laterality`, `episode` with `options`), answer it as a query parameter and call
-again; stop at `done` (1–2 codes), `multiple`, `not_in_map` (I-MAGIC does not have the concept) or
-`unknown` (not in offline rules and live mode disabled).
+again; stop at `done` (1–2 codes), `multiple`, `no_target` (concept is in the map but has no target
+code), `not_in_map` (I-MAGIC does not have the concept) or `unknown` (not in offline rules and live
+mode disabled). A `not_in_map` reply carries `sct` from tx.fhir.org: `inactive` tells whether the
+concept has been retired in SNOMED CT International (the usual reason — I-MAGIC only maps active
+concepts), with `effective_time` of that change. Search by name to find the current concept.
 
 ```
 GET /api/map/8619003                 → need_info, question.type = sex

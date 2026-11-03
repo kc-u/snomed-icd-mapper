@@ -58,7 +58,7 @@ function liveQuery(id, answers) {
         const required = r.questions.filter(q => q.required);
         const pending = required[0] || r.questions[0] || null;
         const out = { mode: 'live', id, name: r.name, release: r.release, applied: r.applied, imagic_url: r.url,
-          status: r.not_in_map ? 'not_in_map' : (pending ? 'need_info' : (r.rows.length <= 2 ? 'done' : 'multiple')),
+          status: r.not_in_map ? 'not_in_map' : (pending ? 'need_info' : (r.rows.length === 0 ? 'no_target' : r.rows.length <= 2 ? 'done' : 'multiple')),
           rows: withTw(r.rows), question: pending, questions: r.questions, notes: r.notes, advice: r.advice };
         liveCache.set(key, out); ok(out);
       } catch (e) { bad(new Error('bad live output: ' + e.message + ' ' + stdout.slice(0, 200))); }
@@ -80,6 +80,33 @@ function send(res, code, body, type) {
   res.writeHead(code, { 'Content-Type': type || 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' });
   res.end(data);
 }
+const sctCache = new Map();
+async function sctInfo(id) {
+  // tx.fhir.org: is the concept still active in SNOMED CT International? (I-MAGIC only maps active concepts)
+  if (sctCache.has(id)) return sctCache.get(id);
+  let out = null;
+  try {
+    const u = `https://tx.fhir.org/r4/CodeSystem/$lookup?system=http://snomed.info/sct&code=${id}&property=inactive&property=effectiveTime&_format=json`;
+    const r = await fetch(u, { headers: { Accept: 'application/fhir+json' } });
+    if (r.ok) {
+      const j = await r.json();
+      out = { display: null, inactive: null, effective_time: null, version: null, source: 'tx.fhir.org SNOMED CT International' };
+      for (const p of j.parameter || []) {
+        if (p.name === 'display') out.display = p.valueString;
+        if (p.name === 'version') out.version = p.valueString;
+        if (p.name === 'property') {
+          const part = Object.fromEntries((p.part || []).map(x => [x.name, x]));
+          const code = part.code && part.code.valueCode, v = part.value || {};
+          const val = Object.keys(v).filter(k => k.startsWith('value')).map(k => v[k])[0];
+          if (code === 'inactive') out.inactive = val === true || val === 'true';
+          if (code === 'effectiveTime') out.effective_time = val == null ? null : String(val);
+        }
+      }
+    }
+  } catch (e) { out = null; }
+  sctCache.set(id, out);
+  return out;
+}
 async function search(q) {
   const u = `https://tx.fhir.org/r4/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=isa/404684003&filter=${encodeURIComponent(q)}&count=20&_format=json`;
   const r = await fetch(u, { headers: { Accept: 'application/fhir+json' } });
@@ -98,12 +125,17 @@ const server = http.createServer(async (req, res) => {
     let m = p.match(/^\/api\/map\/(\d{6,18})$/);
     if (m) {
       const id = m[1], answers = parseAnswers(url.searchParams), mode = url.searchParams.get('mode') || 'auto';
+      let out = null;
       if (mode !== 'live') {
         const r = resolve(rules, id, answers);
-        if (r.status !== 'unknown' || mode === 'offline') return send(res, 200, Object.assign({ mode: 'offline', answers }, r, { rows: withTw(r.rows || []) }));
+        if (r.status !== 'unknown' || mode === 'offline') out = Object.assign({ mode: 'offline', answers }, r, { rows: withTw(r.rows || []) });
       }
-      if (!LIVE) return send(res, 404, { status: 'unknown', id, error: 'not in offline rules and live mode is disabled' });
-      return send(res, 200, Object.assign({ answers }, await liveQuery(id, answers)));
+      if (!out) {
+        if (!LIVE) return send(res, 404, { status: 'unknown', id, error: 'not in offline rules and live mode is disabled' });
+        out = Object.assign({ answers }, await liveQuery(id, answers));
+      }
+      if (out.status === 'not_in_map') out.sct = await sctInfo(id);  // say why: inactive concept, or active but simply unmapped
+      return send(res, 200, out);
     }
     m = p.match(/^\/api\/tw\/([A-Za-z0-9.]+)$/);
     if (m) { const c = m[1].toUpperCase(); return send(res, 200, Object.assign({ code: c }, twCheck(c.replace(/[A-Z]$/, s => s), ''))); }

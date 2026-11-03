@@ -159,7 +159,7 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sel)}
 <b>GET</b> /api/concepts    <b>GET</b> /api/health</pre>
     <table>
       <tr><th>欄位</th><th>值</th></tr>
-      <tr><td class="mono">status</td><td>done（1–2 碼）、multiple、need_info、not_in_map（I-MAGIC 不收）、unknown（離線沒有且直通關閉）</td></tr>
+      <tr><td class="mono">status</td><td>done（1–2 碼）、multiple、need_info、no_target（有概念但無對應碼）、not_in_map（I-MAGIC 不收；附 <span class="mono">sct.inactive</span> 說明概念是否已停用）、unknown（離線沒有且直通關閉）</td></tr>
       <tr><td class="mono">mode / release</td><td>offline 或 live；I-MAGIC 的 Map 版本</td></tr>
       <tr><td class="mono">rows[]</td><td>code、ext（第 7 碼）、name、tw_valid、tw_name、tw_zh、tw_children、tw_prev</td></tr>
       <tr><td class="mono">question</td><td>type（sex / age / refine / laterality / episode）、required、options[]</td></tr>
@@ -191,6 +191,7 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sel)}
   function undo(step){const i=ORDER.indexOf(step);ORDER.slice(i).forEach(k=>{if(k==='age')delete state.answers.age_days;else delete state.answers[k];});if(step==='sex')$('#p-sex').value='';if(step==='age')$('#p-age').value='';render();}
   function qs(){const a=state.answers,p=new URLSearchParams();if(a.sex)p.set('sex',a.sex);if(a.age_days!==undefined)p.set('age_days',a.age_days);for(const k of['refine','laterality','episode'])if(a[k])p.set(k,a[k]);return p.toString();}
   function fmtAge(d){if(d<60)return d+' 天';if(d<730)return Math.floor(d/30)+' 個月';return Math.floor(d/365)+' 歲';}
+  function fmtDate(s){const m=String(s).match(/^(\d{4})-?(\d{2})-?(\d{2})/);return m?`${m[1]}-${m[2]}-${m[3]}`:String(s);}
 
   DEMO.forEach(([id,l])=>{const b=document.createElement('button');b.textContent=l;b.addEventListener('click',()=>start(id));$('#demo-chips').appendChild(b);});
   let timer=null;
@@ -216,7 +217,16 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sel)}
     let r;try{r=await api('/api/map/'+state.id+'?'+qs());}catch(e){f.innerHTML=`<div class="busy">查詢失敗：${esc(e.message)}</div>`;return;}
     const mode=r.mode==='live'?`直通 I-MAGIC${r.release?' · Map '+esc(r.release):''}`:'離線規則';
     if(r.status==='unknown'){f.innerHTML=row('','res',`<span class="mono">${esc(state.id)}</span> 不在離線規則，且直通模式關閉。`);return;}
-    if(r.status==='not_in_map'){f.innerHTML=row('','head',`${esc(r.name||'')}<span class="id">${esc(state.id)}</span> <span class="mk dim">${mode}</span>`)+row('','res','I-MAGIC 不收此概念：不在 SNOMED CT to ICD-10-CM Map 裡。請換上層或同義概念。');return;}
+    if(r.status==='not_in_map'){const s=r.sct||{};const nm=r.name||s.display||'';
+      let why=s.inactive===true?`此概念已在 SNOMED CT 國際版<b>停用</b>${s.effective_time?`（自 ${esc(fmtDate(s.effective_time))}）`:''}，I-MAGIC 只對照現行概念。請改用取代它的現行概念。`
+        :s.inactive===false?'概念仍為現行，但 SNOMED CT to ICD-10-CM Map 沒有收。請換上層或同義概念。'
+        :'I-MAGIC 不收此概念：不在 SNOMED CT to ICD-10-CM Map 裡。請換上層或同義概念。';
+      const key=nm.replace(/^\[[A-Z]+\]\s*/,'').replace(/\s*\([^)]*\)\s*$/,'').trim();
+      if(key.length>=2)why+=` <button class="b" id="near" data-k="${esc(key)}">用名稱找相近概念</button>`;
+      if(s.inactive!=null)why+=`<p class="mk dim" style="margin-top:6px">停用狀態來源：${esc(s.source||'tx.fhir.org')}${s.version?' · '+esc(s.version.replace(/^.*version\//,''))+' 版':''}</p>`;
+      f.innerHTML=row('','head',`${esc(nm)}<span class="id">${esc(state.id)}</span> <span class="mk dim">${mode}</span>`)+row('','res',why);
+      const nb=$('#near',f);if(nb)nb.addEventListener('click',()=>{$('#q').value=nb.dataset.k;suggest(nb.dataset.k);});return;}
+    if(r.status==='no_target'){f.innerHTML=row('','head',`${esc(r.name||'')}<span class="id">${esc(state.id)}</span> <span class="mk dim">${mode}</span>`)+row('','res','I-MAGIC 有此概念，但對照表裡沒有對應的 ICD-10-CM 碼（目標為空）。請換更明確的下層概念。');return;}
     let h=row('概念','head',`${esc(r.name||'')}<span class="id">${esc(r.id||state.id)}</span> <span class="mk dim">${mode}</span>`);
     const a=state.answers,steps=[];
     if(a.sex)steps.push(['sex',`性別：${a.sex==='male'?'男':'女'}`]);
