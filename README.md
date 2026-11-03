@@ -10,11 +10,13 @@ Interactive SNOMED CT → ICD-10-CM mapper, following the question-and-answer lo
 ## Run
 
 ```
-node server.js            # http://localhost:8765
+python -m venv .venv && .venv\Scripts\pip install -r requirements.txt   # once; only `requests`
+start.bat                 # Windows: picks up .venv, then node server.js → http://localhost:8765
+node server.js            # any OS; set PYTHON if the venv is elsewhere
 ```
 
 Requirements: Node 18+ (uses built-in `http` and `fetch`, no npm packages). For live I-MAGIC
-queries, Python 3 with `requests` (`pip install requests`); set `PYTHON` if it is not on PATH.
+queries, Python 3 with `requests` (`requirements.txt`); set `PYTHON` if it is not `.venv` or on PATH.
 
 ```
 PYTHON=C:\path\to\python.exe node server.js     # choose the Python used for live queries
