@@ -175,7 +175,7 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sel)}
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const api=async(u)=>{const r=await fetch(u);const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j;};
-  const DEMO=[['8619003','不孕（先問性別）'],['44465007','踝扭傷（左右側、第 7 碼）'],['44054006','第 2 型糖尿病（直接出碼）'],['703138006','糖尿病緩解（台灣 2023 年版沒有）']];
+  const DEMO=[['44054006','第 2 型糖尿病（直接出碼）'],['26929004','阿茲海默症（一個概念對兩碼）'],['8619003','不孕（先問性別）'],['386661006','發燒（問年齡）'],['54012000','創傷後頭痛（問更明確的診斷）'],['44465007','踝扭傷（左右側、第 7 碼）'],['301011002','大腸桿菌泌尿道感染（兩碼＋追問）'],['371087003','糖尿病足潰瘍（兩碼＋左右側）'],['703138006','糖尿病緩解（台灣 2023 年版沒有）']];
   const EPI={A:'A 初次就醫 initial encounter',D:'D 後續就醫 subsequent encounter',S:'S 後遺症 sequela'};
   const QT={sex:'性別',age:'年齡',refine:'更明確的診斷',laterality:'左右側',episode:'第 7 碼'};
   const QTEXT={sex:'此概念男女對到不同的碼。性別？',age:'年齡影響結果。年齡？',refine:'有無更明確的診斷？沒有選「都不是」。',laterality:'哪一側？不知道選未明示。',episode:'損傷碼需第 7 碼。這次就醫是？'};
@@ -242,9 +242,11 @@ tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sel)}
       else{const opts=q.type==='sex'?[{value:'male',label:'男'},{value:'female',label:'女'}]:q.type==='episode'?Object.entries(EPI).map(([v,l])=>({value:v,label:l})):q.options.map(o=>o.value==='none'?{value:'none',label:'都不是，維持原診斷'}:o);
         inner+=opts.map(o=>`<label class="radio"><input type="radio" name="ask" data-q="${q.type}" data-v="${esc(o.value)}">${esc(o.label)}${o.rows?`<span class="code">→ ${o.rows.map(x=>esc(x.code+x.ext)).join('、')}</span>`:''}</label>`).join('');}
       h+=row(String(steps.length+1),'ask',inner);}
-    const title=r.status==='done'?(r.rows.length>1?'結果：兩碼並列':'結果'):r.status==='multiple'?'結果：仍有多碼':'目前的碼（尚未問完）';
-    let res=`<div class="title"><span>${title}</span>${r.status==='done'?'<button id="copy-all">複製碼</button>':''}</div>`;
-    (r.rows||[]).forEach(x=>{res+=`<div class="cd"><span class="big ${x.tw_valid===false?'bad':''}">${esc(x.code+(x.ext||''))}</span><span class="us">${esc(x.name)}</span><div class="twl">${twMark(x)}</div>`;
+    const n=(r.rows||[]).length,multi=n>1;
+    const title=r.status==='done'||r.status==='multiple'?(multi?`結果：${n} 碼一起用`:'結果'):(multi?`目前的碼（${n} 碼一起用，尚未問完）`:'目前的碼（尚未問完）');
+    let res=`<div class="title"><span>${title}</span>${r.status==='done'||r.status==='multiple'?'<button id="copy-all">複製碼</button>':''}</div>`;
+    if(multi)res+=`<p class="mk dim" style="margin:0 0 6px">這個概念沒有單一的 ICD-10-CM 碼，I-MAGIC 拆成 ${n} 個碼（map group 1 到 ${n}），申報時全部都要列，順序照下面。</p>`;
+    (r.rows||[]).forEach((x,i)=>{res+=`<div class="cd">${multi?`<span class="mk dim">第 ${i+1} 碼</span> `:''}<span class="big ${x.tw_valid===false?'bad':''}">${esc(x.code+(x.ext||''))}</span><span class="us">${esc(x.name)}</span><div class="twl">${twMark(x)}</div>`;
       if(x.tw_children&&x.tw_children.length&&(x.tw_valid===false||x.ext==='-'))res+=`<div class="kids">2023 年版同 stem：${x.tw_children.map(k=>`<span class="code">${esc(k.code)}</span>${esc(k.zh||k.name)}`).join('；')}</div>`;
       if(x.tw_prev)res+=`<div class="kids">美國 FY${esc(x.tw_prev.since)} 新增；CMS 轉換表：之前對應 <span class="code">${esc(x.tw_prev.code)}</span>${x.tw_prev.zh?' '+esc(x.tw_prev.zh):''}。台灣申報用此碼。</div>`;
       res+='</div>';});

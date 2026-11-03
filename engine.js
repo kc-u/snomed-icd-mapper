@@ -75,7 +75,14 @@
         if (answers.refine && answers.refine !== 'none') continue;  // 已換成更明確的診斷，左右側題不再適用
         if (answers.laterality) {
           const o = q.options.find(x => x.value === answers.laterality);
-          if (o) { rows = rows.map(r => ({ code: o.value, ext: r.ext || '-', name: o.label })); trace.push({ step: 'laterality', text: `左右側：${o.label} → ${fmt(rows)}` }); }
+          if (o) {
+            // the option's rows come from I-MAGIC (with a default 7th character); keep the other map groups untouched,
+            // and keep '-' on codes that still need the 7th character so the episode question follows
+            const need7 = rows.some(r => r.ext === '-');
+            rows = o.rows ? o.rows.map(x => x.code === o.value ? { code: x.code, ext: need7 && x.ext ? '-' : x.ext, name: o.label } : copy([x])[0])
+              : rows.map(r => ({ code: o.value, ext: r.ext || '-', name: o.label }));
+            trace.push({ step: 'laterality', text: `左右側：${o.label} → ${fmt(rows)}` });
+          }
         } else {
           need({ type: 'laterality', required: false, text: '哪一側？不知道就選「未明示」', options: q.options.map(o => ({ value: o.value, label: o.label })) });
         }

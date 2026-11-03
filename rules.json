@@ -1332,6 +1332,49 @@
    }
   },
   {
+   "id": "26929004",
+   "name": "Alzheimer's disease",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "G30.9",
+     "ext": "",
+     "name": "Alzheimer's disease, unspecified"
+    },
+    {
+     "code": "F02.80",
+     "ext": "",
+     "name": "Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety"
+    }
+   ],
+   "questions": [],
+   "notes": {
+    "ICD notes for \"Alzheimer's disease\"": [
+     "Use additional code, if applicable, to identify: delirium, if applicable (F05) dementia with anxiety (F02.84, F02.A4, F02.B4, F02.C4) dementia with behavioral disturbance (F02.81-, F02.A1-, F02.B1-, F02.C1-) dementia with mood disturbance (F02.83, F02.A3, F02.B3, F02.C3) dementia with psychotic disturbance (F02.82, F02.A2, F02.B2, F02.C2) dementia without behavioral disturbance (F02.80, F02.A0, F02.B0, F02.C0) mild neurocognitive disorder due to known physiological condition (F06.7-)"
+    ],
+    "ICD notes for \"Dementia in other diseases classified elsewhere\"": [
+     "Code first the underlying physiological condition, such as: Alzheimer's (G30.-) cerebral lipidosis (E75.4) Creutzfeldt-Jakob disease (A81.0-) epilepsy and recurrent seizures (G40.-) hepatolenticular degeneration (E83.01) human immunodeficiency virus [HIV] disease (B20) Huntington's disease (G10) hypercalcemia (E83.52) hypothyroidism, acquired (E00-E03.-) intoxications (T36-T65) Jakob-Creutzfeldt disease (A81.0-) multiple sclerosis (G35-) neurocognitive disorder with Lewy bodies (G31.83) neurosyphilis (A52.17) niacin deficiency [pellagra] (E52) other frontotemporal neurocognitive disorder (G31.09) Parkinson's disease (G20.-) Pick's disease (G31.01) polyarteritis nodosa (M30.0) prion disease (A81.9) systemic lupus erythematosus (M32.-) traumatic brain injury (S06.-) trypanosomiasis (B56.-, B57.-) vitamin B deficiency (E53.8)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "G30.9": {
+     "name_us": "Alzheimer's disease, unspecified",
+     "valid": true,
+     "name": "Alzheimer's disease, unspecified",
+     "zh": "非特定的阿茲海默氏病"
+    },
+    "F02.80": {
+     "name_us": "Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",
+     "valid": true,
+     "name": "Dementia in other diseases classified elsewhere, unspecified severity, without behavioral disturbance, psychotic disturbance, mood disturbance, and anxiety",
+     "zh": "歸類於他處其他疾病所致之失智症，未明示嚴重度，無行為困擾"
+    }
+   }
+  },
+  {
    "id": "29857009",
    "name": "Chest pain",
    "release": "20260901",
@@ -1353,6 +1396,125 @@
      "valid": true,
      "name": "Chest pain, unspecified",
      "zh": "胸痛"
+    }
+   }
+  },
+  {
+   "id": "301011002",
+   "name": "Urinary tract infection caused by Escherichia coli",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "N39.0",
+     "ext": "",
+     "name": "Urinary tract infection, site not specified"
+    },
+    {
+     "code": "B96.20",
+     "ext": "",
+     "name": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere"
+    }
+   ],
+   "questions": [
+    {
+     "type": "refine",
+     "required": false,
+     "heading": "Problem Refinement",
+     "text": "Would one of the following diagnoses apply? Choose the most specific one: Replace the original problem with the more specific diagnosis",
+     "options": [
+      {
+       "value": "624480231000119106",
+       "label": "Neonatal urinary tract infection caused by Escherichia coli",
+       "not_applicable": false,
+       "rows": [
+        {
+         "code": "P39.3",
+         "ext": "",
+         "name": "Neonatal urinary tract infection"
+        },
+        {
+         "code": "B96.20",
+         "ext": "",
+         "name": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere"
+        }
+       ]
+      },
+      {
+       "value": "301011002",
+       "label": "The above choices are not applicable",
+       "not_applicable": true,
+       "rows": null
+      }
+     ]
+    },
+    {
+     "type": "age",
+     "required": false,
+     "heading": "Age Refinement",
+     "intervals": [
+      {
+       "from_days": 0,
+       "to_days": 28,
+       "rows": [
+        {
+         "code": "P39.3",
+         "ext": "",
+         "name": "Neonatal urinary tract infection"
+        },
+        {
+         "code": "B96.20",
+         "ext": "",
+         "name": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere"
+        }
+       ],
+       "next_probe_days": 29
+      },
+      {
+       "from_days": 29,
+       "to_days": 29200,
+       "rows": [
+        {
+         "code": "N39.0",
+         "ext": "",
+         "name": "Urinary tract infection, site not specified"
+        },
+        {
+         "code": "B96.20",
+         "ext": "",
+         "name": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere"
+        }
+       ],
+       "next_probe_days": null
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Urinary tract infection, site not specified\"": [
+     "Use additional code (B95-B97), to identify infectious agent."
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "N39.0": {
+     "name_us": "Urinary tract infection, site not specified",
+     "valid": true,
+     "name": "Urinary tract infection, site not specified",
+     "zh": "未明示部位之泌尿道感染症"
+    },
+    "B96.20": {
+     "name_us": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere",
+     "valid": true,
+     "name": "Unspecified Escherichia coli [E. coli] as the cause of diseases classified elsewhere",
+     "zh": "歸類於他處大腸桿菌所致的疾病"
+    },
+    "P39.3": {
+     "name_us": "Neonatal urinary tract infection",
+     "valid": true,
+     "name": "Neonatal urinary tract infection",
+     "zh": "新生兒泌尿道感染"
     }
    }
   },
@@ -1542,6 +1704,157 @@
      "valid": true,
      "name": "Acute pharyngitis, unspecified",
      "zh": "急性咽炎"
+    }
+   }
+  },
+  {
+   "id": "371087003",
+   "name": "Diabetic foot ulcer",
+   "release": "20260901",
+   "not_in_map": false,
+   "default": [
+    {
+     "code": "E13.621",
+     "ext": "",
+     "name": "Other specified diabetes mellitus with foot ulcer"
+    },
+    {
+     "code": "L97.509",
+     "ext": "",
+     "name": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity"
+    }
+   ],
+   "questions": [
+    {
+     "type": "laterality",
+     "required": false,
+     "heading": "Laterality Refinement",
+     "text": "Refine laterality for the concept: Diabetic foot ulcer:",
+     "options": [
+      {
+       "value": "L97.519",
+       "label": "Non-pressure chronic ulcer of other part of right foot with unspecified severity",
+       "rows": [
+        {
+         "code": "E13.621",
+         "ext": "",
+         "name": "Other specified diabetes mellitus with foot ulcer"
+        },
+        {
+         "code": "L97.519",
+         "ext": "",
+         "name": "Non-pressure chronic ulcer of other part of right foot with unspecified severity"
+        }
+       ]
+      },
+      {
+       "value": "L97.529",
+       "label": "Non-pressure chronic ulcer of other part of left foot with unspecified severity",
+       "rows": [
+        {
+         "code": "E13.621",
+         "ext": "",
+         "name": "Other specified diabetes mellitus with foot ulcer"
+        },
+        {
+         "code": "L97.529",
+         "ext": "",
+         "name": "Non-pressure chronic ulcer of other part of left foot with unspecified severity"
+        }
+       ]
+      },
+      {
+       "value": "L97.509",
+       "label": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity",
+       "rows": [
+        {
+         "code": "E13.621",
+         "ext": "",
+         "name": "Other specified diabetes mellitus with foot ulcer"
+        },
+        {
+         "code": "L97.509",
+         "ext": "",
+         "name": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": {
+    "ICD notes for \"Other specified diabetes mellitus with foot ulcer\"": [
+     "Use additional code to identify site of ulcer (L97.4-, L97.5-)"
+    ],
+    "ICD notes for \"Non-pressure chronic ulcer of lower limb, not elsewhere classified\"": [
+     "Code first any associated underlying condition, such as: any associated gangrene (I96) atherosclerosis of the lower extremities (I70.23-, I70.24-, I70.33-, I70.34-, I70.43-, I70.44-, I70.53-, I70.54-, I70.63-, I70.64-, I70.73-, I70.74-) chronic venous hypertension (I87.31-, I87.33-) diabetic ulcers (E08.621, E08.622, E09.621, E09.622, E10.621, E10.622, E11.621, E11.622, E13.621, E13.622) postphlebitic syndrome (I87.01-, I87.03-) postthrombotic syndrome (I87.01-, I87.03-) varicose ulcer (I83.0-, I83.2-)"
+    ]
+   },
+   "advice": {},
+   "fetched": "2026-11-03",
+   "tw2023": {
+    "E13.621": {
+     "name_us": "Other specified diabetes mellitus with foot ulcer",
+     "valid": true,
+     "name": "Other specified diabetes mellitus with foot ulcer",
+     "zh": "其他特定糖尿病，伴有足部潰瘍"
+    },
+    "L97.509": {
+     "name_us": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity",
+     "valid": true,
+     "name": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity",
+     "zh": "未明示側性足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+    },
+    "L97.519": {
+     "name_us": "Non-pressure chronic ulcer of other part of right foot with unspecified severity",
+     "valid": true,
+     "name": "Non-pressure chronic ulcer of other part of right foot with unspecified severity",
+     "zh": "右側足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+    },
+    "L97.519-": {
+     "name_us": "Non-pressure chronic ulcer of other part of right foot with unspecified severity",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "L97519": {
+       "name": "Non-pressure chronic ulcer of other part of right foot with unspecified severity",
+       "zh": "右側足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+      }
+     }
+    },
+    "L97.529": {
+     "name_us": "Non-pressure chronic ulcer of other part of left foot with unspecified severity",
+     "valid": true,
+     "name": "Non-pressure chronic ulcer of other part of left foot with unspecified severity",
+     "zh": "左側足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+    },
+    "L97.529-": {
+     "name_us": "Non-pressure chronic ulcer of other part of left foot with unspecified severity",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "L97529": {
+       "name": "Non-pressure chronic ulcer of other part of left foot with unspecified severity",
+       "zh": "左側足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+      }
+     }
+    },
+    "L97.509-": {
+     "name_us": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity",
+     "valid": true,
+     "stem": true,
+     "name": "",
+     "zh": "",
+     "children": {
+      "L97509": {
+       "name": "Non-pressure chronic ulcer of other part of unspecified foot with unspecified severity",
+       "zh": "未明示側性足部其他部位非壓迫性慢性潰瘍，未明示嚴重程度"
+      }
+     }
     }
    }
   },

@@ -26,7 +26,7 @@ PORT=9000 node server.js
 
 ```
 browser ──┐
-          ├─► server.js ─► engine.js + rules.json      offline rules (44 concepts)
+          ├─► server.js ─► engine.js + rules.json      offline rules (47 concepts)
 agent  ───┘       │       ─► scripts/live.py            live query to I-MAGIC for any other concept
                   │       ─► tw2023.json                Taiwan 2023-edition check + Chinese names
                   └─► tx.fhir.org $expand               name search
@@ -97,7 +97,10 @@ from the public sources above; no patient data.
 
 ## Limits
 
-- Offline rules cover 44 concepts; age thresholds were probed, not read from the map file.
+- Offline rules cover 47 concepts; age thresholds were probed, not read from the map file.
+- A concept with no single ICD-10-CM code comes back as several rows that are reported together
+  (I-MAGIC map groups, e.g. Alzheimer's disease → G30.9 + F02.80); questions can still apply to one
+  of the rows (diabetic foot ulcer → E13.621 + L97.5-, laterality asked for the ulcer code).
 - One concept at a time. I-MAGIC lets concepts on the same problem list refine each other; not done here.
 - Live mode depends on the I-MAGIC demo page staying as it is.
 
